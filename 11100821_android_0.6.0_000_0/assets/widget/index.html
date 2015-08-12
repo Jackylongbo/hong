@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    	<link rel="stylesheet" href="css/ui-btn.css">
+    	<link rel="stylesheet" href="css/ui-tab.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+		<link rel="stylesheet" href="css/ui-res.css">
+        <script src="js/zy_control.js">
+        </script>
+        <script src="js/zy_click.js">
+        </script>
+       	<script src="js/public.js">
+    	</script>
+       	<script src="js/push.js">
+    	</script>
+    </head>
+    <body class="um-vp">
+        <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh c-org c-m10 t-wh">
+                <!--按钮开始-->
+ 				<div id="goleft" class="btn btn-l btn-a ub ub-ac" onclick="goback();">       
+              	<div class="ulim">返回</div>
+          		</div>
+				<!--按钮结束-->
+		<h1 class="ut ulev1 ut-s tx-c" tabindex="0" id="tabtitle">&nbsp;</h1>
+				<!--按钮开始-->
+ 				<div id="divright" class="btn btn-r ub ub-ac btn-n" onclick="right_click();">       
+                <div class="ulim" id="righttxt"></div>             
+      			</div>
+				<!--按钮结束-->
+            </div>
+            <!--header结束-->
+			
+			<!--content开始-->
+            <div id="content" class="ub-f1 tx-l t-bla">
+                
+            </div>
+            <!--content结束--><!--footer开始-->
+            <div id="footer" class="uf c-m1 t-wh">
+				 <!--iPhone导航条开始-->
+<div class="ub c-bla c-m12 tab" >	
+ <input class="uhide" type="radio" name="tabSwitch" checked="true">
+	<div ontouchstart="zy_touch('',zy_for)" onclick="go_menu('index_content.html', '恒通典当行')" class="ub-f1 ub ub-ver tab-act"><div class="ub-f1 ub-img5 tp-home"></div><div class="uinn ulev-2 tx-c">首页</div></div>
+ <input class="uhide" type="radio" name="tabSwitch">
+	<div ontouchstart="zy_touch('',zy_for)" onclick="go_menu('j_money.html', '借钱')" class="ub-f1 ub ub-ver tab-act"><div class="ub-f1 ub-img5 tp-info"></div><div class="uinn ulev-2 tx-c">借钱</div></div>
+	<input class="uhide" type="radio" name="tabSwitch">
+	<div ontouchstart="zy_touch('',zy_for)" onclick="go_menu('h_money.html', '还钱')" class="ub-f1 ub ub-ver tab-act"><div class="ub-f1 ub-img5 tp-set"></div><div class="uinn ulev-2 tx-c">还钱</div></div>
+	<input class="uhide" type="radio" name="tabSwitch">
+	<div ontouchstart="zy_touch('',zy_for)" onclick="go_menu('z_money.html', '赚钱')" class="ub-f1 ub ub-ver tab-act"><div class="ub-f1 ub-img5 tp-shop"></div><div class="uinn ulev-2 tx-c">赚钱</div></div>
+	<input class="uhide" type="radio" name="tabSwitch">
+	<div ontouchstart="zy_touch('',zy_for)" onclick="go_menu('more.html', '更多内容')" class="ub-f1 ub ub-ver tab-act"><div class="ub-f1 ub-img5 tp-talk"></div><div class="uinn ulev-2 tx-c">更多</div></div>
+</div>
+<!--iPhone导航条结束-->
+
+            </div>
+            <!--footer结束-->
+        </div>
+    </body>
+    <script>
+		$$("divright").style.visibility = "hidden";
+		$$("goleft").style.visibility = "hidden";
+		localStorage.ispay="n";
+		localStorage.moneypay="n";
+    	var inurl="";
+        window.uexOnload = function(type){
+			//uexWidget.loadApp("android.intent.action.VIEW","video/*","http://61.14.175.39/zerox/LOTUS/1-39.m3u8");
+            //uexWidget.loadApp("android.intent.action.SEND", "*/*", "hello");
+			isre();
+			if(typeof(localStorage.wifiid)=="undefined"){getwifi();}//如果为空，则进行获取
+			uexWidgetOne.getPlatform();
+            uexWidgetOne.cbGetPlatform = platformSuccess;
+            if (!type) {
+				
+                go_menu("index_content.html","恒通典当行");
+            }
+			window.onorientationchange=window.onresize=function()
+			{
+				zy_resize("content",0,$$("header").offsetHeight);				
+			}
+			uexWindow.setReportKey('0', '1');
+    		uexWindow.onKeyPressed = function(keyCode){goback();}	
+        }
+		
+		var a11=0;
+		function go_menu(filename, title){
+			$$("divright").style.visibility = "hidden";
+			$$("goleft").style.visibility = "hidden";
+			if(filename != "index_content.html"){$$("goleft").style.visibility = "visible";}
+			setright(filename);
+			inurl=filename;
+			$$("tabtitle").innerHTML=title;
+			zy_con("content", filename, 0, $$("header").offsetHeight);
+			//uexWindow.evaluatePopoverScript("","content","left_pp('"+filename+"')");//安卓手机滑动效果
+		}
+		function loadcon(urln)
+		{
+			//zy_con("content", urln, 0, $$("header").offsetHeight);
+			//uexWindow.evaluatePopoverScript("","content","right_pp()");//安卓手机滑动效果
+		}
+		//设置右文字
+		function setright(f){
+			if(f=="gbook.html"){
+				$$("divright").style.visibility = "visible";
+				$$("righttxt").innerHTML="留言";
+			}
+			if(f=="zx.html"){
+				$$("divright").style.visibility = "visible";
+				$$("righttxt").innerHTML="咨询";
+			}
+			
+		}
+		//判断右文字点击后的动作
+	 function right_click(){
+	 	if(inurl=="gbook.html"){uexWindow.evaluatePopoverScript("","content","ly()");return false;}
+		if(inurl=="zx.html"){uexWindow.evaluatePopoverScript("","content","ly()");return false;}
+	 }
+	 
+	 function goback(){
+	 	if(inurl=="zjlist.html" || inurl=="about_pic.html" || inurl=="prolist.html" || inurl=="caselist.html" || inurl=="gbook.html" || inurl=="newslist.html" || inurl=="zx.html" || inurl=="youhui.html"){go_menu("more.html", "更多内容");return false}
+	 	go_menu("index_content.html", "恒通典当行");
+	 }
+	 
+	 function platformSuccess(opId, dataType, data){
+         var platstr = "";
+         if (dataType == 2 && data == 0) {
+             localStorage.platstr = "ios";
+         }
+         if (dataType == 2 && data == 1) {
+            localStorage.platstr = "android";
+         }
+         if (dataType == 2 && data == 4) {
+             localStorage.platstr = "wp";
+         }
+            //终端标识
+     }
+	 
+	 
+	function showh()
+    {
+    	var a=$$('header');
+    	a.style.display="block";
+    	setTimeout(function(){
+    	a.style.webkitTransitionDuration = '1000ms';;
+    	a.style.opacity=".4";},1);
+    
+    }
+
+function getwifi(){
+	uexDevice.cbGetInfo = function(opCode, dataType, data){
+	if(data !=""){
+		var obj = eval('('+data+')');
+		var wifi=obj.macAddress;
+		wifi=wifi.replace(/:/g,"");
+		localStorage.wifiid=wifi;
+	}
+	}
+	uexDevice.getInfo('16');//得到wifi
+}
+
+function isre(){
+	uexWidget.onResume = function(){
+	if(localStorage.ispay=="y" && uexWidgetOne.platformName == "iOS"){
+		uexWindow.evaluateScript('shop_dd',0,"isget();");//检测支付状态
+	}
+	if(localStorage.moneypay=="y" && uexWidgetOne.platformName == "iOS"){
+		uexWindow.evaluatePopoverScript('','content','isget();');//检测支付状态
+	}
+	}
+}
+
+</script>
+</html>

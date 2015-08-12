@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Things to know</title>
+<link rel="stylesheet" type="text/css" href="Help.css" />
+<meta name="KEYWORDS" content="things, know" />
+<meta name="description" content="A few things to know about svnX." />
+</head>
+<body>
+<div class="body" id="body">
+<a name="things_to_know"></a>
+<h1>3. A few things to know</h1>
+<a name="toc9"></a>
+<h2>3.1. Authentication</h2>
+<p>SvnX supports authentication via <q>--username</q> and <q>--password</q> options of the svn binary.</p>
+<dl>
+<dt><b>svn</b>://</dt><dd>
+SvnX supports direct authentication via user/password set in the Working Copies &amp; Repositories windows although the client credentials caching method is recommended (see below).</dd>
+<dt><b>svn+ssh</b>://</dt><dd>
+Authentication should be handled by an ssh-agent.  The free application<br/>
+SSHKeychain can provide this functionality &lt;<a href="http://www.sshkeychain.org">www.sshkeychain.org</a>&gt;.</dd>
+<dt><b>https</b>://</dt><dd>
+This requires you to have or accept an SSL certificate to authenticate all communication.  SvnX now works if the certificate must be interactively validated whether using the <q>svn</q> tool or the “<var>Call Subversion libraries directly</var>” preference is activate.  You can also add the certificate manually to subversion’s runtime “<q>servers</q>” file, located in the <q>~/.subversion</q> folder.  Or you can run a command from the terminal that will let the certificate be permanently accepted:
+<pre>
+	$ svn list https://host.example.com/repos/project
+	
+	Error validating server certificate for 'https://host.example.com:443':
+	 - The certificate is not issued by a trusted authority. Use the
+	   fingerprint to validate the certificate manually!
+	Certificate information:
+	 - Hostname: host.example.com
+	 - Valid: from Jan 30 19:23:56 2004 GMT until Jan 30 19:23:56 2006 GMT
+	 - Issuer: CA, example.com, Sometown, California, US
+	 - Fingerprint: 7d:e1:a9:34:33:39:ba:6a:e9:a5:c4:22:98:7b:76:5c2:...
+	
+	(R)eject, accept (t)emporarily or accept (p)ermanently?
+</pre></dd>
+</dl>
+<p>Note that svnX has the same functionality and limitations as the svn binaries. If something works in the terminal, it should work in svnX.<br/>
+SvnX can also take advantage of client credentials caching, the same way svn does.</p>
+<ul>
+<li>About SSL certificate management:<br/>Subversion 1.6 (nightly build): <a href="http://svnbook.red-bean.com/nightly/en/svn.serverconfig.httpd.html#svn.serverconfig.httpd.authn.sslcerts">here</a>.<br/>Subversion 1.5: <a href="http://svnbook.red-bean.com/en/1.5/svn.serverconfig.httpd.html#svn.serverconfig.httpd.authn.sslcerts">here</a>.</li>
+<li>About client credentials caching:<br/>Subversion 1.6 (nightly build): <a href="http://svnbook.red-bean.com/nightly/en/svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.credcache">here</a>.<br/>Subversion 1.5: <a href="http://svnbook.red-bean.com/en/1.5/svn.serverconfig.netmodel.html#svn.serverconfig.netmodel.credcache">here</a>.</li>
+<li>Forum topic: &lt;<a href="http://groups.google.com/group/svnx">groups.google.com/group/svnx</a>&gt;.</li>
+</ul>
+<a name="toc10"></a>
+<h2>3.2. Repository window</h2>
+<ul>
+<li>If the repository is referenced via <code>https://</code> then on opening the window svnX will check that you currently have a valid SSL certificate for the repository.  If you don’t then svnX will prompt you to accept or reject a new certificate.  You need to accept the certificate or only the cached repository log will be accessible.  Obviously, for security reasons, you should read the alert &amp; decide that the certificate is valid before accepting it.</li>
+<li>Click the <var>Display Mode</var> button (gear icon) to toggle between advanced &amp; simple display modes.</li>
+<li>Select a row in the repository log list (top part of window) to see the message &amp; changed paths (advanced mode) for that change.</li>
+<li>Click the (round) radio button in the appropriate row to switch the repository browser (bottom part of window) to browse that revision of the repository.</li>
+<li>Note that you can drag &amp; drop between the repository browser and the Finder.<br/>
+If you drag out several items, svnX assumes you want to <var>export</var> them.<br/>
+If you drag out one folder, svnX will ask you whether you want to <var>checkout</var> or <var>export</var> the folder.</li>
+<li>You can also open repository items¹ by dragging them onto applications in the <var>Dock</var> and directly into the windows of some applications.</li>
+<li>Drag a single file or folder from the Finder to a directory in the repository browser to <var>import</var> it.<br/>
+  You will then be prompted for a commit message, may rename the imported item and set other options first.</li>
+<li>Drag &amp; drop between a repository and a working copy to <var><a href="#merge">merge</a></var> into your working copy or to <var><a href="#switch">switch</a></var> it to another branch (see below).</li>
+<li>Click a segment of the repository URL to browse an upper level of the repository.</li>
+<li>Browse any repository item “as a sub-repository” by double-clicking it.</li>
+<li>Open repository items¹ &amp; log entry path items (in appropriate applications) by clicking the <var>Open</var> toolbar item (or typing ⌘O or enter).</li>
+<li>Hover the mouse pointer over an item in the repository browser to see an informative tool-tip.
+<p></p>
+¹ Opening repository items transparently exports them to a temporary folder from where they are actually opened.  The “<var>Name opened repository items with rev</var>” preference, when activated, prefixes the exported item’s file name with its revision number.  Also see <a href="#open">Opening files</a> below.</li>
+</ul>
+<a name="toc11"></a>
+<h3>3.2.1. Repository item Copy, Move, Make Dir &amp; Delete sheets</h3>
+<ul>
+<li>Click the <var>Copy</var> toolbar icon to open a sheet to ‘<q>svn copy</q>’ the selected item in the repository browser at the <b>selected</b> revision.</li>
+<li>Click the <var>Move</var> toolbar icon to open a sheet to ‘<q>svn move</q>’ the selected item in the repository browser at the <b>HEAD</b> revision.</li>
+<li>Click the <var>Make Dir</var> toolbar icon to open a sheet to ‘<q>svn mkdir</q>’ one or more new directories in the repository.</li>
+<li>Click the <var>Delete</var> toolbar icon to open a sheet to ‘<q>svn delete</q>’ one or more items in the repository.</li>
+</ul>
+<p>Each sheet includes controls &amp; information specific to its task, a repository browser that displays the <b>HEAD</b> revision of the repository and a text field to enter a commit message.</p>
+<a name="toc12"></a>
+<h3>3.2.2. Repository item Diff</h3>
+<ul>
+<li>Click the <var>Diff</var> toolbar icon to compare files in selected revision (log list), changed path or repository item to their <b>PREV</b> revision.</li>
+<li>Alt-click to open a sheet to choose custom revisions (changed path or repository item only).</li>
+</ul>
+<a name="toc13"></a>
+<h3>3.2.3. Repository item Blame</h3>
+<ul>
+<li>Click the <var>Blame</var> toolbar icon to open copies of the selected repository files or changed paths with ‘<q>svn blame</q>’ (author &amp; revision) info for each line.</li>
+<li>Alt-click to also include date info.</li>
+</ul>
+<a name="toc14"></a>
+<h3>3.2.4. Repository item Reports</h3>
+<p>This provides the facility to create, browse &amp; print ‘<q>svn log</q>’ reports of an item in a repository.</p>
+<ul>
+<li>Clicking the <var>Report</var> toolbar icon opens an options sheet.  Choose options from:
+  <ul>
+  <li>A report on the selected repository item or the currently displayed log items.</li>
+  <li>Include a list of changed paths with each revision.</li>
+  <li>Continue past copies of the selected repository item while traversing its history.</li>
+  <li>Display revision dates or relative ages.</li>
+  <li>Output in reverse (increasing) or normal (decreasing) revision order.</li>
+  <li>Limit the maximum number of revisions to include in the report.</li>
+  </ul></li>
+<li>This then opens a new window &amp; displays an HTML formatted, printable, log report.</li>
+<li>Long reports will span multiple HTML pages.  Use the buttons at the top of each page to navigate between them.</li>
+</ul>
+<a name="toc15"></a>
+<h3>3.2.5. Repository item Checkout, Export &amp; Import</h3>
+<ul>
+<li>Use <var>Checkout</var> to create a new working copy for a directory in a repository:
+  <ul>
+  <li>Select a directory item in the repository browser.</li>
+  <li>Click the <var>Checkout</var> toolbar icon to ‘<q>svn checkout</q>’ the directory at the <b>selected</b> revision.</li>
+  <li>You will be prompted to select a folder on your local machine where you want svnX to create the new working copy.</li>
+  <li>If the “<var>Add Working Copy for checked out files</var>” preference is active then a new item will also be added to the Working Copies list window, automatically.</li>
+  <li>Alternatively you can simply drag a directory item from the repository browser to a Finder window &amp; click <var>Checkout</var> in the alert that appears.</li>
+  </ul></li>
+<li>Use <var>Export</var> to retrieve copies of files &amp; directories from a repository without using a working copy:
+  <ul>
+  <li>Select a one or more items in the repository browser.</li>
+  <li>Click the <var>Export</var> toolbar icon to ‘<q>svn export</q>’ the directories &amp; ‘<q>svn cat</q>’ the files at the <b>selected</b> revision.</li>
+  <li>You will be prompted to select a folder on your local machine where you want svnX to create the new files &amp; folders.</li>
+  <li>If items with the same names already exist in your selected folder you will be asked if you want replace (overwrite) each item.</li>
+  <li>Alternatively you can simply drag one or more item from the repository browser to a Finder window &amp; click <var>Export</var> in the alert that appears.</li>
+  </ul></li>
+<li>Use <var>Import</var> to add a new file or folder (hierarchy) that exists on your machine (but not in a working copy) to a repository.
+  <ul>
+  <li>Select a directory item in the repository browser.</li>
+  <li>Click the <var>Import</var> toolbar icon to ‘<q>svn import</q>’ into that directory at the <b>HEAD</b> revision.</li>
+  <li>You will be prompted to select the file or folder on your local machine that you want to import.</li>
+  <li>You will then be prompted for a commit message and your may rename the imported item &amp; set other options.</li>
+  <li>If you are importing a folder you will also have the option to set the <var>Depth</var> of the import.</li>
+  <li>Alternatively you can drag a single file or folder from the Finder to a directory in the repository browser to initiate the import.</li>
+  </ul></li>
+</ul>
+<a name="toc16"></a>
+<h2>3.3. Working copy window</h2>
+<ul>
+<li>If your working copy references its repository via <code>https://</code> then on opening the window svnX will check that you currently have a valid SSL certificate for the repository.  If you don’t then svnX will prompt you to accept or reject a new certificate.  You need to accept the certificate if you subsequently wish to use commands that will contact the repository e.g. <var>Commit</var>.  Obviously, for security reasons, you should read the alert &amp; decide that the certificate is valid before accepting it.</li>
+<li>Refreshing a working copy does an ‘<q>svn status</q>’ in <var>Smart View</var>, and an ‘<q>svn status --verbose</q>’ otherwise.</li>
+<li>If you press the alt key while clicking the <var>Refresh</var> toolbar item, the <q>--show-updates</q> switch is added (the latest info will be retrieved from the repository, allowing you to identify out-of-date files). </li>
+<li>You can access a contextual menu (right-click the file list) containing the <var>Info</var>, <var>Blame</var>, <var>Cleanup</var>, <var>Rename…</var>, <var>Copy…</var>, <var>Lock</var>, <var>Unlock</var> &amp; other commands.  Press the alt key to reveal some alternate commands.</li>
+<li>Drag columns in the file list to rearrange them &amp; click their titles to change the sort order.</li>
+<li>Hover the mouse pointer over a file name or status column to see a detailed status tool-tip.</li>
+<li>Hover the mouse pointer over a status column title (OS X 10.5+) to see the column’s title.</li>
+</ul>
+<a name="toc17"></a>
+<h2>3.4. Updating files folders or everything</h2>
+<ul>
+<li>Click the <var>Update</var> toolbar item to be offered the chance to update the entire working copy to HEAD (the latest revision). Press the alt key while clicking it to open the custom update sheet.  <b>Note:</b> If you are using the <var>Tree View</var> mode then the custom update is rooted in the current folder.</li>
+<li>Alternatively, click the <var>Update</var> command button to update only the selected items. Again, pressing the alt key will open the custom update sheet.</li>
+<li>If you are using Subversion 1.6+ you will see <var>Depth</var> &amp; <var>Accept</var> pop-up menus.  <var>Depth: Infinity</var> is equivalent to checking the old <var>Recursive</var> checkbox &amp; <var>Depth: Files</var> to unchecking it.  The <var>Accept</var> pop-up menu specifies the automatic conflict resolution action.  Each item has a tool tip describing it.  The <var>Force Operation</var> checkbox sets the <q>--force</q> option on the update command.</li>
+</ul>
+<a name="toc18"></a>
+<h2>3.5. Move, copy or rename working copy items</h2>
+<p>Moving, copying or renaming an item in the working copy (svn move, copy).</p>
+<ul>
+<li>Don’t do that in the Finder - you have to let Subversion know that you want to do such a thing so the history of the file can be saved.</li>
+<li>In svnX, these operations usually take place in the <var>Tree View</var>:
+ <ul>
+ <li>click the leftmost (‘Tree’) segment of the <var>View</var> toolbar item.</li>
+ <li>drag an item from the right pane to the left to move a file or folder.</li>
+ <li>alt-drag an item to copy it.</li>
+ <li>double-click an unmodified item’s name to rename it.</li>
+ <li>if you drag a single item, a sheet will appear to let you rename the moved or copied item.</li>
+ <li>alternatively you can choose <var>Rename…</var> or <var>Copy…</var> from the contextual menu if you wish to perform either of these without changing the item’s directory.</li>
+ </ul></li>
+</ul>
+<a name="merge"></a>
+<h2>3.6. Merging into the working copy</h2>
+<p>Apply differences between repository items to a working copy (svn merge).</p>
+<ul>
+<li>In the working copy window select the item that is to receive the changes or select nothing to let svnX find the best match.</li>
+<li>Open the repository to which the working copy belongs and choose a revision.</li>
+<li>In the repository browser, locate the file or folder from which you want to merge or in the log locate the revision or a changed path.</li>
+<li>Drag this item from the repository to the working copy window.</li>
+<li>A merge configuration sheet will appear.  This shows the source of the merge (<var>Merge From</var>) and its target (<var>Into</var>).  The source may be changed by dragging a different item onto the <var>Merge From</var> URL.<br/>
+<b>NOTE:</b> Using a log entry or log entry’s changed path defaults to a <var>Reverse Merge</var> i.e. a merge that tries to undo the change.  Uncheck <var>Reverse Merge</var> if you want to apply the change.</li>
+<li>Choose whether you want to merge:
+ <ul>
+ <li>a single change (the change made by the <var>Merge From</var> revision to the <var>Merge From</var> item).</li>
+ <li>changes between 2 revisions (the changes made to the <var>Merge From</var> item from the <var>Since Revision</var> to the <var>Merge From</var> revision).</li>
+ <li>a reintegrate merge (uses <q>--reintegrate</q> option &amp; is only enabled for Subversion 1.6+).</li>
+ <li>differences between 2 repository items (the change made by the <var>Merge From</var> revision to the <var>Merge From</var> item).  This requires dragging a second item from the repository (any revision) to the second source box (<var>Source URL 2</var>).
+ <p></p></li>
+ </ul></li>
+<li>Activate the <var>Reverse Merge</var> checkbox to reverse a change, range or the order of the 2 URLs.</li>
+<li>If you are using Subversion 1.4 or 1.5 you will see a <var>Recursive</var> checkbox.  If this is active then unchecking it only merges the changes to the folder &amp; any files directly contained in that folder.</li>
+<li>If you are using Subversion 1.6+ you will see <var>Depth</var> &amp; <var>Accept</var> pop-up menus.  <var>Depth: Infinity</var> is equivalent to checking the old <var>Recursive</var> checkbox &amp; <var>Depth: Files</var> to unchecking it.  The <var>Accept</var> pop-up menu specifies the automatic conflict resolution action.  Each item has a tool tip describing it.</li>
+<li>See the Subversion documentation for the effect of the <var>Ignore Ancestry</var> (<q>--ignore-ancestry</q>)
+<a href="http://svnbook.red-bean.com/nightly/en/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry">here</a> and <var>Record Only</var> (<q>--record-only</q>)
+<a href="http://svnbook.red-bean.com/nightly/en/svn.branchmerge.advanced.html#svn.branchmerge.advanced.blockchanges">here</a> checkboxes.</li>
+<li>Clicking the <var>Dry Run</var> button allows you to try the merge operation but without it actually making any changes.  The results of this will be displayed.</li>
+<li>Finally click <var>OK</var> to perform the merge or <var>Cancel</var> to simply close the sheet.</li>
+</ul>
+<a name="switch"></a>
+<h2>3.7. Switching the working copy</h2>
+<p>Moving the working copy to another branch (svn switch).</p>
+<ul>
+<li>Open the repository to which the working copy belongs.</li>
+<li>Choose a revision.</li>
+<li>In the repository browser, locate the folder to which you want to switch.</li>
+<li>Drag this folder from the repository to the working copy window &amp; release it while pressing the control or command keys.</li>
+<li>A confirmation sheet is displayed.
+For more information about this great Subversion feature, read Subversion documentation.
+Make sure not to overlook this!!</li>
+</ul>
+<a name="toc21"></a>
+<h2>3.8. Ignoring items in the working copy</h2>
+<p>Ignoring files &amp; folders in the working copy stops them from appearing in the files/status list.
+The items are not modified or changed in any way.  Simply they are ignored by svnX &amp; Subversion.</p>
+<ul>
+<li>You can make svnX/Subversion ignore unversioned items by selecting them, clicking the right mouse button &amp;  choosing <var>Ignore</var> from the contextual menu.  If the items are in the same folder, have names with the same prefix or extension &amp; no other files (in the same folder) match that pattern then you will be offered the option of ignoring any items, in that folder, with names that match the pattern.  Click <var>Use Pattern</var> or <var>OK</var> and svnX will append the appropriate values to the <code>svn:ignore</code> Subversion properties of each of the parent folders of the selected items.</li>
+<li>To stop ignoring items: select the parent folder of the item in the file list, open the Properties panel, from the <code>svn:ignore</code> property delete the line containing the item's name or click the <var>-</var> button to delete the entire property.</li>
+</ul>
+<a name="toc22"></a>
+<h2>3.9. Properties panel</h2>
+<p>Subversion properties panel (svn propdel, propedit, propget, proplist, propset).</p>
+<ul>
+<li>The Subversion properties panel provides support for viewing, adding, editing &amp; deleting multiple text (UTF-8) &amp; binary (hexadecimal) properties on multiple working copy items.  Both standard (<code>svn:*</code>) &amp; custom properties are supported.  For known properties svnX provides customised editing and enforces file only &amp; directory only properties.</li>
+<li>The panel may be opened or closed at any time by clicking the <var>Properties</var> toolbar item.</li>
+<li>The panel continually reflects the Subversion properties of the selected items in the active working copy window.</li>
+<li>To add a property:
+ <ul>
+ <li>Select the items to which you want to add the property.</li>
+ <li>Open the properties panel (if it's not already visible).</li>
+ <li>In the bottom-most group select or enter the property’s name in the combo-box.</li>
+ <li>Press the tab key.  The editor will switch to one appropriate one for the property’s value.
+ <b>Note:</b> Some properties have an implicit value, in which case no value editor is displayed.</li>
+ <li>If appropriate enter/edit the value of the property.  Click the <var>Abc</var> button to switch the editor to hexadecimal mode if you need to enter a binary property value.  (The button will then display the binary icon.  Click it again to return to text mode.  If the contents of the field don’t change then the data is not valid UTF-8 and cannot be converted to text.)</li>
+ <li>Click ‘<var>+</var>’ to add/set the property on all the selected working copy items.
+ <b>Note:</b> Any selected items that already have a property with the same name will have their value changed to this new value.</li>
+ </ul></li>
+<li>To delete a property:
+ <ul>
+ <li>Select the items from which you want to delete the property.</li>
+ <li>Open the properties panel (if it's not already visible).</li>
+ <li>Click the ‘<var>-</var>’ next to the name of the property you want to delete.
+ The property will be deleted from all the selected working copy items.</li>
+ </ul></li>
+<li>To modify a property:
+ <ul>
+ <li>Select the items &amp; open the properties panel.</li>
+ <li>Locate the name of the property you wish to modify &amp; edit the value below it.</li>
+ <li>Click the ‘<var>+</var>’ next to the name of the property you want to modify.
+ The property &amp; value will be set on all the selected working copy items.</li>
+ </ul></li>
+<li>To copy a property from one item to others:
+ <ul>
+ <li>If necessary, first delete that property from the destination items.</li>
+ <li>Then select the source item &amp; destination items.</li>
+ <li>Click the ‘<var>+</var>’ next to the property name &amp; it will be replicated across all selected items.</li>
+ </ul></li>
+<li>Properties are not displayed or altered for deleted or unversioned items.</li>
+<li>If the selected working copy items contain different values for the same property then the text “<code>&lt;multiple values&gt;</code>” is shown in place of the real values for that property.</li>
+<li>All property changes are local to the working copy until you commit them to the repository.</li>
+<li>The property panel works with the svn command tool or takes advantage of ‘<var>Call Subversion libraries directly</var>’ option for best performance.</li>
+<li>It is possible to customise the list of known properties via a custom Properties.plist file.
+ Copy <code>svnX.app/Resources/Properties.plist</code> into <code>~/Library/Application Support/svnX/</code> &amp; edit.</li>
+</ul>
+<a name="toc23"></a>
+<h2>3.10. Activity window</h2>
+<ul>
+<li>The <var>Stop</var> button tries to gracefully stop the process.  Alt-clicking this button sends a non-ignorable kill to the process, which always works :-D.  (This is not recommended, though).</li>
+</ul>
+<a name="toc24"></a>
+<h2>3.11. Diff</h2>
+<ul>
+<li>In a working copy window, click the <var>Diff</var> icon to compare the selected items with their pristine copies (BASE revisions).</li>
+<li>Click while pressing the shift key to compare the selected items with their previous (PREV) revisions.</li>
+<li>Clicking while pressing the alt key displays a sheet that allows you to compare any two revisions of a single item.</li>
+<li>In the general preferences, you can choose between:
+  <ul>
+  <li>FileMerge (requires Xcode installation or, at least, <q>/usr/bin/opendiff</q> &amp; FileMerge.app)</li>
+  <li>TextWrangler (requires <q>/usr/bin/twdiff</q>)</li>
+  <li>BBEdit (requires <q>/usr/bin/bbdiff</q>)</li>
+  <li>CodeWarrior</li>
+  <li>Araxis Merge (requires <q>/usr/local/bin/araxissvndiff</q>)</li>
+  <li>DiffMerge (requires <q>/usr/local/bin/diffmerge.sh</q>)</li>
+  <li>Changes (requires <q>/usr/bin/chdiff</q>)</li>
+  <li>Guiffy (requires <q>/usr/local/bin/guiffy</q>)</li>
+  <li>KDiff3 (requires a symbolic link in <q>~/bin</q> to the app’s binary:<br/>
+execute `<q>cd ~/bin; ln -s &lt;path-to-kdiff3-app&gt;/Contents/MacOS/kdiff3</q>`).</li>
+  </ul></li>
+</ul>
+<a name="toc25"></a>
+<h2>3.12. Resolve</h2>
+<ul>
+<li>To interactively resolve conflicts in working copy files (that are indicated as having conflicted contents), simply selected the files and click <var>Resolve</var>.  The conflicted files along with your changes &amp; the repository conflicts will be displayed in an interactive 3-way merge.</li>
+<li>When you have resolved the conflicts, save the files &amp; then click the <var>Resolved</var> button in the svnX working copy window to indicate to Subversion that you have corrected/resolved the conflicts.
+Resolve requires FileMerge, Araxis Merge, Guiffy or KDiff3 - installed as described above.</li>
+</ul>
+<a name="open"></a>
+<h2>3.13. Opening files</h2>
+<ul>
+<li>Files may be opened (in appropriate applications) from working copy windows, review &amp; commit windows and from repository windows (directly or via <var>Blame</var>).</li>
+<li>Files may also be opened via AppleScript and the svnx command-line tool.</li>
+<li>In all these cases which applications are used to open which files is determined by a script in svnX's application bundle.</li>
+<li>It is possible to customise this behaviour by placing a script at <q>~/.subversion/svnXopen.sh</q>.  If a script exists at this location then it will be given the first shot at opening any files.  If that script exits with a non-zero value then svnX’s default behaviour is executed.</li>
+<li>A copy of the script that svnX uses named <q>svnXopen.sh</q> is provided on the disk image for your convenience.  This may be copied into <q>~/.subversion/</q> and modified.</li>
+</ul>
+<a name="toc27"></a>
+<h2>3.14. Review and Commit window</h2>
+<ul>
+<li>This window allows you to review your changes before committing them to the repository.  You can independently include &amp; exclude files &amp; directories from the commit while editing the message, viewing diffs &amp; continuing to modify files.</li>
+<li>Open this window by clicking the <var>Review…</var> button in a working copy window.</li>
+<li>Select an item in the <var>Available Items</var> list to view its diffs.  Check/uncheck items to include/exclude them from the commit.  Each item will display the same tool tip it does in the working copy.</li>
+<li>Use the diff pane settings pop-up menu (gear icon) to customise the diff display.</li>
+<li>The <var>Message</var> tab displays &amp; allows you to edit your commit messages.</li>
+<li>Click the <var>Recent</var> tab to see a list of the most recent commit messages.  Highlight one and click Insert to insert its text into the text of the current message.</li>
+<li>Click the <var>Templates</var> tab to select, add or delete a message template.  Click ‘<var>+</var>’ to add a new template to the list, then edit its name &amp; content.  Click ‘<var>-</var>’ to delete the currently selected template.  Click <var>Insert</var> to evaluate the selected template &amp; insert its text into the text of the current message (at the current insertion point or replacing the current selection).</li>
+<li>Click <var>Commit</var> to commit the checked items with the displayed message to the repository.  On success the committed items will be removed from the list.</li>
+</ul>
+<p>Note: Attempting to close a <var>Review &amp; Commit</var> window or quit svnX while items are checked &amp; the <var>Message</var> panel contains text will display a confirmation alert.  (Thus helping you avoid accidental data loss.)</p>
+<p>The commit message template feature supports the following keywords in templates:</p>
+<dl>
+<dt><q>&lt;MACHINE&gt;</q></dt><dd>
+Substitute the computer’s name.</dd>
+<dt><q>&lt;USER&gt;</q></dt><dd>
+Substitute the current user’s name.</dd>
+<dt><q>&lt;DATE&gt;</q></dt><dd>
+Substitute the current date &amp; time.</dd>
+<dt><q>&lt;FILES&gt;</q></dt><dd>
+Substitute the names of the files selected for committing. Insert a newline between consecutive file names.</dd>
+<dt><q>&lt;FILES&gt;</q>…text…<q>&lt;/FILES&gt;</q></dt><dd>
+Substitute the names of the files selected for committing. Insert “…text…” between consecutive file names.</dd>
+<dt><q>&lt;SCRIPT&gt;</q>…text…<q>&lt;/SCRIPT&gt;</q></dt><dd>
+Substitute the output from executing the shell script “…text…”. The script is passed the following parameters:<br/><q>    svn-binaries-folder, working-copy-path,<br/>    count-of-args-before-first-file, commit-file-names…</q></dd>
+</dl>
+<a name="toc28"></a>
+<h2>3.15. Template Samples</h2>
+<a name="toc29"></a>
+<h3>3.15.1. Keyword Sampler</h3>
+<p>The template:</p>
+<pre>
+	begin files for '&lt;USER&gt;' of '&lt;MACHINE&gt;' on '&lt;DATE&gt;' [[
+		&lt;FILES&gt;
+		+ &lt;/FILES&gt;
+	]] end files
+</pre>
+<p>Will generate output similar to:</p>
+<pre>
+	begin files for 'fred' of 'Fred's Mac' on '2008-02-29  16:40' [[
+		File1.c
+		+ File2.cpp
+		+ File3.m
+	]] end files
+</pre>
+<a name="toc30"></a>
+<h3>3.15.2. Files &amp; Functions</h3>
+<p>The template:</p>
+<pre>
+	&lt;SCRIPT&gt;#!/bin/sh
+	alias svn="$1/svn"; cd "$2"; shift $3
+	until [ -z "$1" ]; do
+	  echo "* $1"
+	  # List the names of the modified functions
+	  svn diff --diff-cmd diff -x '-U0 -p --show-function-line=[[:blank:]]*[-+][[:blank:]]*([[:alpha:]_]' "$1" \
+		| sed -E -e 's/(^@@ [^@]* @@ )((.*([[:&lt;:]][[:alnum:]_]+) *\()|(([[:blank:]]*[-+][[:blank:]]*\([^\)]+\)[[:blank:]]*))([[:alnum:]_]+)).*/  (\4\7): /' -e "t" -e "d" \
+		| uniq
+	  echo ""; shift
+	done
+	&lt;/SCRIPT&gt;
+</pre>
+<p>Will generate output similar to:</p>
+<pre>
+	* File1.c
+	  (c_function_name_1): 
+	  (c_function_name_2): 
+	
+	* File2.cpp
+	  (cpp_function_name): 
+	
+	* File3.m
+	  (obj_c_method_name):
+</pre>
+<a name="toc31"></a>
+<h2>3.16. Disk cache</h2>
+<ul>
+<li>The disk cache caches copies of repository logs &amp; repository directory lists.</li>
+<li>The disk cache is enabled by default.  You can disable it in the Preferences window.</li>
+<li>The cache is stored in <q>~/Library/Caches/com.lachoseinteractive.svnX/</q>.</li>
+<li>You can safely reset the cache by quitting svnX, deleting some or all the “<q>A*.cache</q>” files in the above folder &amp; relaunching svnX.</li>
+</ul>
+<a name="toc32"></a>
+<h2>3.17. Invoking svnX’s user interface from AppleScript</h2>
+<p>There are currently several AppleScript commands available:</p>
+<table class="Cmds">
+<tr>
+<td>displayHistory</td>
+<td>opens an svnX file history sheet on a working copy window.</td>
+</tr>
+<tr>
+<td>openWorkingCopy</td>
+<td>opens an existing or new working copy window.</td>
+</tr>
+<tr>
+<td>openRepository</td>
+<td>opens an existing or new repository window.</td>
+</tr>
+<tr>
+<td>diffFiles</td>
+<td>compare working copy files with their base revisions.</td>
+</tr>
+<tr>
+<td>openFiles</td>
+<td>asks svnX to open any files in appropriate applications.</td>
+</tr>
+</table>
+<a name="toc33"></a>
+<h3>3.17.1. Invoking svnX’s file history sheet from AppleScript</h3>
+<p>Use displayHistory to open svnX’s file history sheet.</p>
+<dl>
+<dt>Usage:</dt><dd>
+<code>tell application "svnX" to displayHistory "/absolute/path/to/the/file"</code>
+<p></p></dd>
+<dt>TextMate example: </dt><dd>
+<code>osascript -e 'set TM_FILEPATH to get system attribute "TM_FILEPATH"' \<br/>          -e 'tell application "svnX" to displayHistory TM_FILEPATH'</code>
+<p></p></dd>
+<dt>You can also invoke FileMerge to compare the file with the pristine copy (without displaying svnX’s diff window, actually without even opening svnX):</dt><dd>
+<code>svn diff --diff-cmd /Applications/svnX.app/Contents/Resources/svndiff.sh \<br/>         -x opendiff $TM_FILEPATH &gt; /dev/null</code></dd>
+</dl>
+<a name="toc34"></a>
+<h2>3.18. Invoking svnX’s user interface from a command-line</h2>
+<p>SvnX includes a command-line tool/script ‘<q>svnx</q>’.  By default, when you launch svnX, a symbolic link to the svnx tool is installed at <q>~/bin/svnx</q>.<br/>
+The svnx tool provides the following sub-commands:</p>
+<table class="Cmds">
+<tr>
+<td>help</td>
+<td>display some usage text.</td>
+</tr>
+<tr>
+<td>log (or -l) &lt;file-path&gt;</td>
+<td>open a file history sheet for file-path.</td>
+</tr>
+<tr>
+<td>wc (or -w) [working-copy-path]</td>
+<td>open window for working-copy-path (defaults to “.”).</td>
+</tr>
+<tr>
+<td>rep (or -r) [wc-path-or-URL]</td>
+<td>open repository window for wc-path-or-URL (defaults to “.”).</td>
+</tr>
+<tr>
+<td>diff (or -d) &lt;file-path...&gt;</td>
+<td>compare the files with their base revisions.</td>
+</tr>
+<tr>
+<td>open (or -o) &lt;file-path...&gt;</td>
+<td>open the files and/or folders in appropriate applications.</td>
+</tr>
+<tr>
+<td>resolve (or -v) &lt;file-path...&gt;</td>
+<td>interactively resolve file conflicts using FileMerge.</td>
+</tr>
+</table>
+<dl>
+<dt>Usage example:</dt><dd>
+<code>svnx wc &lt;my-working-copy-folder&gt;</code>
+<p></p></dd>
+<dt>Note: To prevent svnX from installing the symbolic link enter the following in a terminal:</dt><dd>
+<code>defaults write com.lachoseinteractive.svnX installSvnxTool -bool NO</code></dd>
+</dl>
+<hr class="light" />
+</div>
+
+</body></html>

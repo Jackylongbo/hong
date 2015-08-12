@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-img.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main">
+
+<!--列表开始-->
+<div id="nlist">
+</div>
+<!--列表结束-->
+
+
+</div>
+</body>
+<script>
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	prolist();
+}
+
+function prolist(){
+		uexWindow.toast("0","5","正在获取...","0");
+		var url = json_http_url+"prolist.asp?SortID=9";
+		uexXmlHttpMgr.onData = prolistSuccess;
+		uexXmlHttpMgr.open(1212, "get", url,"");
+		uexXmlHttpMgr.send(1212);
+}
+
+function prolistSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(1212);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","目前暂无内容","2000");}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	//alert(str);
+	var json=eval(str);
+	var i=0;
+	var html="";
+	for (i; i < json.length; i++) {
+		if(i % 2==0){
+		html+="<div class='ub tx-c'>";
+		}
+		html+="<div class='ub-f1 uinn' onclick='show("+json[i].ID+");'>";
+		html+="<div class='ub ub-ver'>";
+		html+="<div class='ub ub-pc ub-f1'><img width='100%' src='"+json_http_url+json[i].SmallPic+"'></div>"
+		html+="<div class='ub ub-pc ub-f1 uinn ut-s btext'><b>"+json[i].ProductName+"</b></div>";
+		html+="</div>";
+		html+="</div>"
+		if(i % 2==1){
+		html+="</div>";
+		}
+	}
+	$$("nlist").innerHTML=html;
+}
+
+function show(id){
+	localStorage.proid=id;
+	localStorage.infile="pro_show.html";
+	localStorage.showstr="服务项目详情";
+	uexWindow.open("proshow", '0', "all_list.html", 2, '', '', 4|128);
+}
+</script>
+
+<script src="js/go.js"></script>
+</html>

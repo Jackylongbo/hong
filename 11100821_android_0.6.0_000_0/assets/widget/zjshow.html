@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-img.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="page_0" class="up ub ub-ver" tabindex="0">
+
+
+<div id="sdiv">
+	
+	
+	
+	
+	 	<div class=" ub b-gra c-m2 t-bla ub-ac lis c-wh"> 	 
+     <div class="uinn" style="width:7em" id="q2"></div>      
+ 		<div class="ub-f1 ub ub-ver">
+ 			<div class="ub"> 
+ 		    <div class="ub-f1 btext" id="q1">姓名：</div> 
+ 		    <!--<div class="ub-f2 tx-c"><img src='img/star0.png' /><img src='img/star0.png' /><img src='img/star0.png' /><img src='img/star0.png' /><img src='img/star1.png' /></div>--> 
+ 		    </div> 
+ 		    <div class="umar-t" id="q8">职称：</div>
+ 		    <div class="umar-t" id="q9">简介：</div>
+ 		</div>
+ 		</div>
+	
+<!--块容器开始-->
+<div class="ub ub-ver uinn c-wh">
+
+<!--块容器开始-->
+<div class="ub b-gra c-m1">	
+<div class="ub-f1 uinn">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act1')" onclick="showzjpic();" class="btn us uinn5 c-pink c-m1 uc-a t-wh"><b>浏览相册</b></div>
+<!--按钮结束-->
+</div>	 
+<div class="ub-f1 uinn ">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act1')" onclick="tel('021-78987666');" class="btn us uinn5 c-blu c-m1 uc-a t-wh"><b>电话预约</b></div>
+<!--按钮结束-->
+</div>
+
+<!--
+<div class="ub-f1 uinn">
+<div ontouchstart="zy_touch('btn-act1')" onclick="show();" class="btn us uinn5 c-org c-m1 uc-a t-wh"><b>用户评论</b></div>
+</div>-->
+
+
+
+ </div>
+<!--块容器结束-->
+
+<div class="textcss" id="q3">内容</div>	
+</div>
+<!--块容器结束-->	
+</div>
+
+</div>
+</body>
+<script>
+var id=localStorage.zjid;
+var zjname="";
+//$$("sdiv").style.display="none";
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	proshow();
+}
+
+function proshow(){
+		uexWindow.toast("0","5","正在获取...","0");
+		var url = json_http_url+"proshow.asp?id="+id;
+		uexXmlHttpMgr.onData = proshowSuccess;
+		uexXmlHttpMgr.open(7321, "get", url,"");
+		uexXmlHttpMgr.send(7321);
+}
+
+function proshowSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(7321);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","目前暂无内容","2000");}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	var json=eval(str);
+	$$("q1").innerHTML="<b>"+json[0].ProductName+"</b>";
+	localStorage.zjname=json[0].ProductName;
+	var pic=json[0].SmallPic;
+	pic=pic.replace(/\..\//g,wwwurl);
+	$$("q2").innerHTML+="<img src='"+pic+"'>";
+	$$("q3").innerHTML=json[0].Content;
+	$$("q8").innerHTML+=json[0].zjzc;
+	$$("q9").innerHTML+=json[0].zjabout;
+	$$("sdiv").style.display="";
+}
+
+function goback(){
+	uexWindow.windowBack(1);
+}
+
+function tel(m){
+	uexCall.dial(m);
+}
+
+function show(){
+	localStorage.infile="pl_list.html";
+	localStorage.showstr="用户评论";
+	uexWindow.open("pl", '0', "all_list_2.html", 2, '', '', 0x4);
+}
+
+function showzjpic(){
+	localStorage.infile="zj_pic.html";
+	localStorage.showstr="专家相册";
+	uexWindow.open("zjxx", '0', "all_list.html", 2, '', '', 0x4);
+}
+</script>
+</html>

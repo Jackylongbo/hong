@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-btn.css">
+	<link rel="stylesheet" href="css/ui-img.css">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/ui-list.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/ui-color.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main">
+
+
+<div id="about">
+<!--块容器开始-->
+<div class="ub ub-ver b-gra uinn textcss">
+
+　　我们公司是经中国人民银行批准成立的典当融资机构，专门从事对法人、自然人和其他组织提供质押、抵押典当业务。<br />
+
+　　我们公司成立于1992年，注册资金2000万元，公司位于金山石化地区，后迁址到南京西路，现在营业地址为上海茅台路357号。<br />
+
+　　行业地位：公司成立20年来，不断拓展经营思路，完善服务质量，为众多企业、个人提供了质押典当服务，受到了社会各界的好评，经济效益稳步提高，从50万元注册资本发展到2000万元，在全市200多家典当行中占有重要地位。<br />
+
+　　经营内容：如今形成以房产车辆、金银饰品、珠宝钻石、高档名表、家用电器、有价证券等业务的占有市场，并积极开拓证券质押业务，探索典当边际业务，成为申城典当行中业务范围较广的一家。<br />
+
+　　经营理念是：以我们可能达到的任何方式提供快捷方便的服务，同时适应时代发展步伐，不断开拓网络典当业务，为广大客户提供优质服务。<br />
+
+　　未来的发展方向:目前，我行正在寻求与有识之士进行合作，遵循稳健经营、利润共享、风险共担的原则，共同开发中国典当业这块宝地。<br />
+
+
+
+
+
+</div>
+<!--块容器结束-->
+</div>
+
+
+
+<div id="lx" class="uinn">
+<!--块容器开始-->
+<div class="ub ub-ver uba b-gra uc-a1 tx-l">
+<div class="ubb b-gra c-m1 uinn t-blu">总部：上海市长宁区茅台路357号</div>
+<div class="ubb b-gra c-m1 uinn">公交：127、71、383、856、944</div>
+<div class="ubb b-gra c-m1 uinn t-blu">地铁2号线，娄山关路站 近芙蓉江路路口</div>
+<div class="ubb b-gra c-m1 uinn" onclick="tel('02162289595');">电话：62289595*0 62336234*0</div>
+<div class="ubb b-gra c-m1 uinn"><div class="uinn">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="map();" class="ub ub-ac ub-pc btn umh4 c-m10 ulim1 b-bla ulev-0 uinn5 c-org us uc-a t-wh"><b>查看地图</b></div>
+<!--按钮结束-->
+</div>
+</div>
+</div>
+<!--块容器结束-->
+</div>
+
+
+
+
+
+
+<div id="lxa" class="uinn">
+<!--块容器开始-->
+<div class="ub ub-ver uba b-gra uc-a1 tx-l">
+<div class="ubb b-gra c-m1 uinn t-blu">分部：上海市普陀区大渡河路1505号</div>
+<div class="ubb b-gra c-m1 uinn">公交：950、944、838、856、754、743、551</div>
+<div class="ubb b-gra c-m1 uinn t-blu">轨道：11号线 真如站 近武宁路路口，友通数码港</div>
+<div class="ubb b-gra c-m1 uinn" onclick="tel('02152656568');">电话：52656568，52656566</div>
+<div class="ubb b-gra c-m1 uinn"><div class="uinn">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="map2();" class="ub ub-ac ub-pc btn umh4 c-m10 ulim1 b-bla ulev-0 uinn5 c-org us uc-a t-wh"><b>查看地图</b></div>
+<!--按钮结束-->
+</div>
+</div>
+</div>
+<!--块容器结束-->
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+<script>
+//$$("lx").style.display="none";
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+}
+
+function showlx(){
+	$$("about").style.display="none";
+	$$("lx").style.display="";
+}
+
+function showabout(){
+	$$("about").style.display="";
+	$$("lx").style.display="none";
+}
+
+function tel(m){
+	uexCall.dial(m);
+}
+
+function caseshow(url,title){
+	uexWindow.evaluateScript("root",0,"go_menu(\""+url+"\",\""+title+"\")");
+}
+
+function map(){
+	uexWindow.open('map_win', '0', 'all_map.html', 2, '', '', 0x4);
+}
+function map2(){
+	uexWindow.open('map_win', '0', 'all_map2.html', 2, '', '', 0x4);
+}
+</script>
+<script src="js/go.js"></script>
+</html>

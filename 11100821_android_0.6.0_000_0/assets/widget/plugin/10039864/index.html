@@ -1,0 +1,35 @@
+<script>
+
+var cburl = null;
+function onOAuth(winNam,url){
+	if(winNam == "LoginWin")
+	{
+		if(url.indexOf(cburl)==0)
+		{
+			var key=url.match(/(.*)#access_token=(.*)&expires_in=(.*)&openid=(.*)&openkey=(.*)/);
+			if(key){
+				if(window.localStorage){
+					localStorage.qqacctoken = key[2];
+					localStorage.qqtokenexp = key[3];
+					localStorage.qqopenid = key[4];
+					localStorage.qqcurrentime = parseInt((new Date().getTime())/1000);
+				}
+				else
+					uexWindow.toast("0","5","No support localStorage!",1000);
+				uexWidget.finishWidget("1");
+			}
+		}
+	}
+}
+function getopenInfo(opId,dataType,data){
+	var data=JSON.parse(data);
+	cburl = data.redirectUrl;
+	uexWindow.open("LoginWin","0","login.html?key="+data.key+"&redirurl="+encodeURIComponent(data.redirectUrl),"2","0","0","1");
+}
+window.uexOnload = function(){
+	uexWindow.onOAuthInfo=onOAuth;
+	uexWidget.cbGetOpenerInfo = getopenInfo;
+	uexWidget.getOpenerInfo();
+	
+}
+</script>

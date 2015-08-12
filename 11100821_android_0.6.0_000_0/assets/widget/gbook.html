@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-img.css">
+    <link rel="stylesheet" href="css/ui-list.css">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/ui-btn.css">
+    <link rel="stylesheet" href="css/ui-input.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/ui-color.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+	<script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main">
+
+<div id="lydiv">
+<!--块容器开始-->
+<div class="ub ub-ver b-gra ">	
+	 <div class="ubb b-gra uinn ">
+<!--文本开始-->
+<div class="ub t-bla ulab">  
+<div class="uinn ulim b2text">标题：</div> 
+ <div class="ub-f1 b-gra uinput uinn4">  
+ 		<input placeholder="请输入留言标题" id="title" name="title" type="text" style="border:none;">   
+  </div>
+</div>
+<!--文本结束-->
+
+</div>	
+	 <div class="ubb b-gra uinn ">
+<!--文本开始-->
+<div class="ub t-bla ulab">  
+<div class="uinn ulim b2text">内容：</div> 
+ <div class="ub-f1 uinput uinn4">  
+ 		<textarea placeholder="请输入留言内容" id="txt" name="txt" type="textarea" style="border:none;height:5em;"></textarea>
+  </div>
+</div>
+<!--文本结束-->
+</div>	
+	 <div class="ubb b-gra uinn">
+	 	<!--文本开始-->
+<div class="ub t-bla ulab">  
+<div class="uinn ulim b2text">姓名：</div> 
+ <div class="ub-f1 uinput uinn4">
+ 		<input placeholder="请输入你的姓名" id="uname" name="uname" type="text" style="border:none;">
+  </div>
+</div>
+<!--文本结束-->
+
+</div>
+	 <div class="ubb b-gra uinn ">
+	 	<!--文本开始-->
+<div class="ub t-bla ulab">  
+<div class="uinn ulim b2text">电话：</div> 
+ <div class="ub-f1 uinput uinn4">  
+ 		<input placeholder="请输入你的联系电话" id="tel" name="tel" type="text" style="border:none;">   
+  </div>
+</div>
+<!--文本结束-->
+	 </div>	
+	 <div class="ubb b-gra uinn ">
+	 	<!--文本开始-->
+<div class="ub t-bla ulab">  
+<div class="uinn ulim b2text">邮箱：</div> 
+ <div class="ub-f1 uinput uinn4">  
+ 		<input placeholder="请输入你的联系邮箱" id="mail" name="mail" type="text" style="border:none;">   
+  </div>
+</div>
+<!--文本结束-->
+	 </div>	
+
+<div class="c-m1 uinn tx-c">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="save_ly();" class="btn us uinn5 c-org c-m7 uc-a t-wh">提　　交</div>
+<!--按钮结束-->
+	
+ </div> 
+</div>
+<!--块容器结束-->
+</div>
+
+
+
+
+
+<div id="lylist">
+<!--列表开始-->
+<!--列表结束-->
+</div>
+<div id="lymore">
+<!--块容器开始-->
+<div class="ub b-gra">
+<div class="b-gra ub-f1 uinn uc-l1 tx-c" ontouchstart="zy_touch('btn-act')" onclick="showmore();">更多留言</div>	 
+</div>
+<!--块容器结束-->
+</div>
+
+
+
+
+
+		
+</div>
+</body>
+<script>
+$$("lydiv").style.display = "none";
+$$("lymore").style.display = "none";
+var page=0;
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	gbooklist(0);
+}
+
+function gbooklist(pages){
+		page = int(pages) + 1;
+		uexWindow.toast("0","5","正在读取留言...","0");
+		var url = json_http_url+"gbooklist.asp?page="+page;
+		uexXmlHttpMgr.onData = listSuccess;
+		uexXmlHttpMgr.open(7103, "get", url,"");
+		uexXmlHttpMgr.send(7103);
+}
+
+function listSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(7103);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","当前没有留言内容","2000");$$("lymore").style.display = "none";}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	//alert(str);
+	var json=eval(str);
+	var i=0;
+	var dt="";
+	var rq="";
+	var date1;
+	var recount=0;
+	var retime=0;
+	var retime2=0;
+	var html="<div class='b-gra c-wh us'>";
+	for (i;i<json.length;i++){
+		dt=json[i].AddTime;
+		date1=new Date(dt.replace(/-/g, "\/"));
+		rq=date1.getDate();
+		retime=date1.getHours();
+		if (retime<10){retime="0"+retime;}
+		retime2=date1.getMinutes();
+		if (retime2<10){retime2="0"+retime2;}
+		retime+=":"+retime2;
+		rq=rq+"";
+		if(rq.length==1){rq="0"+rq;}
+		dt=date1.getMonth()+1;
+		if(i % 2==0){
+			html+="<div ontouchstart=zy_touch('btn-act0') onclick='show("+json[i].ID+");' class='ub ubb b-gra c-m2 t-bla ub-ac lis'>";
+		}
+		else{
+			html+="<div ontouchstart=zy_touch('btn-act0') onclick='show("+json[i].ID+");' class='ub ubb b-gra c-m2 t-bla ub-ac lis' style='background-color:#F5F5F5'>";	
+		}
+
+	html+="<div class='ub ub-ac ub-pc lis-th ub-img tx-c' style='height:4em;width:4em;background:url(img/"+dt+".png);color:blue;'><br /><b>"+rq+"</b></div>";
+	html+="<div class='ub-f1 ub ub-ver'>";
+	html+="<div class='ulev-1 umh3' style='color:#008080;'><b>来自"+json[i].Linkman+"网友</b></div>";
+	html+="<div class='ulev0 umh4 b2text'>"+json[i].MesTitle+"</div>";
+	html+="<div class='ub ub-ac t-gra ulev-2'>";
+	html+="<div class='ub-f1'>"+retime+"</div>";
+	if(json[i].ReplyContent===null || json[i].ReplyContent==""){recount=0;}
+	else{recount=1;}
+	html+="<div class='ub-f1 tx-c'>回复("+recount+")</div>";
+	html+="</div>";
+	html+="</div>";
+	html+="</div>";
+}
+html+="</div>";
+$$("lylist").innerHTML+=html;
+$$("lymore").style.display = "";
+}
+
+function save_ly(){
+	title=$$("title").value;
+	txt=$$("txt").value;
+	if(title=="" || txt==""){
+		uexWindow.toast("0","5","留言的标题与内容不能为空","2000");
+		return false;
+	}
+	uname=$$("uname").value;
+	tel=$$("tel").value;
+	mail=$$("mail").value;
+	saveJson(title,txt,uname,tel,mail);
+}
+
+function saveJson(title,txt,uname,tel,mail){
+		uexWindow.toast("0","5","正在保存留言...","0");
+		var url = json_http_url+"gbooksave.asp?action=gbooksaves&title="+encodeURIComponent(title)+"&txt="+encodeURIComponent(txt)+"&uname="+encodeURIComponent(uname)+"&tel="+tel+"&mail="+encodeURIComponent(mail);
+		uexXmlHttpMgr.onData = saveSuccess;
+		uexXmlHttpMgr.open(7102, "post", url,"");
+		uexXmlHttpMgr.send(7102);
+}
+function saveSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(7102);
+		uexWindow.closeToast();
+		if(result=="y"){uexWindow.toast("0","5","留言成功 请等待管理审核","3000");$$("lydiv").style.display = "none";}
+	    }
+}
+
+function ly(){
+	$$("lydiv").style.display = "";
+}
+
+function show(id){
+	localStorage.gbookid=id;
+	uexWindow.open("gbookshow", '0', "gbook_show.html", 2, '', '', 0x4);
+}
+
+function showmore(){
+	gbooklist(page);
+}
+</script>
+<script src="js/go.js"></script>
+</html>

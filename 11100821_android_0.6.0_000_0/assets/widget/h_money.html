@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-btn.css">
+    <link rel="stylesheet" href="css/ui-input.css">
+    <link rel="stylesheet" href="css/ui-img.css">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/ui-list.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/ui-color.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main">
+
+<!--块容器开始-->
+<div id="a" class="ub ub-ver uinn">	
+<!--文本开始-->
+<div id="ycode" class="umar-t t-red">验证码：</div>
+<div class="umar-t uba uc-a1 b-gra us-i uinput uinn4">
+<input placeholder="请输入验证码：" name="sjm" id="sjm" type="text" class="uc-a1">   
+</div>  
+<!--文本结束-->
+<!--文本开始-->
+<div class="umar-t uba uc-a1 b-gra us-i uinput uinn4">    
+<input placeholder="请输入典当票号：" name="dnum" id="dnum" type="text" class="uc-a1">   
+</div>  
+<!--文本结束-->
+<!--文本开始-->
+<div class="uba uc-a1 b-gra us-i uinput uinn4">    
+ <input placeholder="输入你的姓名：" name="uname" id="uname" type="text" class="uc-a1">   
+</div>  
+<!--文本结束-->
+<!--文本开始-->
+<div class="umar-t uba uc-a1 b-gra us-i uinput uinn4">    
+ <input placeholder="输入手机号码：" name="umo" id="umo" type="text" class="uc-a1">   
+</div>  
+<!--文本结束-->
+<!--下拉列表开始-->
+<div class="umar-t ub uba1 uc-a1 b-gra us-i sel">  
+   <div class="ub-f1 ut-s uinn ulev-1 tx-l">身份证</div>
+   <div class="ubl b-gra c-bla c-m2 umw2 ub ub-pc uc-r1 ub-ac"> 
+    <div class="ub-img umw1 umh1 res3"></div> 
+  </div> 
+  <select name="utype" selectedindex="0" id="utype" onchange="zy_selectmenu(this.id)"> 
+   <option value="2">身份证</option> 
+   <option value="3">组织机构代码证</option>  
+   <option value="4">护照</option>
+   <option value="5">营业执照</option>  
+   <option value="6">其他证件</option>  
+   <option value="7">驾照</option>  
+  </select>
+</div>
+<!--下拉列表结束-->
+<!--文本开始-->
+<div class="umar-t uba uc-a1 b-gra us-i uinput uinn4">    
+ <input placeholder="输入证件号码：" name="ucard" id="ucard" type="text" class="uc-a1">   
+</div>  
+<!--文本结束-->
+<!--下拉列表开始-->
+<div class="umar-t ub uba1 uc-a1 b-gra us-i sel">  
+<div class="ub-f1 ut-s uinn ulev-1 tx-l">请选择续当或赎当：</div>
+   <div class="ubl b-gra c-bla c-m2 umw2 ub ub-pc uc-r1 ub-ac"> 
+    <div class="ub-img umw1 umh1 res3"></div> 
+  </div> 
+  <select name="xdcount" selectedindex="0" id="xdcount" onchange="zy_selectmenu(this.id)"> 
+   <option value="">请选择续当或赎当：</option>
+   <option value="s">我想赎当</option> 
+   <option value="0">续当原当期</option> 
+   <option value="1">续当一个月</option> 
+   <option value="2">续当二个月</option>  
+   <option value="3">续当三个月</option>
+   </select>
+</div>
+<!--下拉列表结束-->
+
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="ddsql();" class="umar-t btn uba b-bla uinn5 c-blu2 c-m1 uc-a us">确定提交</div>
+<!--按钮结束-->
+
+</div>
+<!--块容器结束-->
+
+
+
+<div id="c">
+<!--块容器开始-->
+<div class="ub ub-ver uinn">	
+<div>借款金额：<span id="c1" class="t-blu"></span></div>
+<div>到期时间：<span id="c2" class="t-blu"></span></div>
+<div>手续费用：<span id="c4" class="t-blu"></span></div>
+<div>支付金额：<span id="c3" class="t-blu"></span></div>
+
+
+</div>
+<!--块容器结束-->
+</div>
+
+
+<div id="e">
+<!--块容器开始-->
+<div class="ub ub-ver uinn">	
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="gopay();" class="umar-t btn uba b-bla uinn5 c-org c-m1 uc-a">确定手机支付</div>
+<!--按钮结束-->
+
+</div>
+<!--块容器结束-->
+</div>
+
+<br /><br /><br /><br /><br />
+</div>
+</body>
+<script>
+localStorage.moneypay="n";//还款支付状态
+$$("c").style.display="none";
+$$("e").style.display="none";
+var dnum="";//典当票号
+var sjm=getrnd(4);//验证码
+$$("ycode").innerHTML="验证码："+sjm;
+var paytotal=0;//续当还款金额与赎当还款金额变量
+var z=0;
+window.uexOnload=function(type){
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	uexPay.onStatus = paySuccess;
+}
+
+function ddsql(){
+	dnum=$$("dnum").value;
+	var sjmre=$$("sjm").value;
+	if(dnum=="" || sjmre==""){
+		uexWindow.toast("0","5","票号与验证码不能为空","2000");
+		return;
+	}
+	if(sjm != sjmre){
+		uexWindow.toast("0","5","验证码不正确","2000");
+		return;
+	}
+	var uname=$$("uname").value;
+	var umo=$$("umo").value;
+	
+	if(ismobile(umo)==false){
+		uexWindow.toast("0","5","手机号码格式不正确","2000");
+		return;
+	}
+	
+	var utype=$$("utype").value;
+	var ucard=$$("ucard").value;
+	if(uname=="" || umo=="" || utype=="" || ucard==""){
+		uexWindow.toast("0","5","所有表单内容必须输入","2000");
+		return;
+	}
+	var xdcount=$$("xdcount").value;
+	if(xdcount==""){
+		uexWindow.toast("0","5","请选择还款类型或周期","2000");
+		return;
+	}
+		uexWindow.toast("1","5","正在提交查询...","0");
+		var url = "http://www.epawn.cn/json_app/pay_save.asp?sjm="+sjmre+"&dnum="+dnum+"&uname="+encodeURIComponent(uname)+"&umo="+umo+"&utype="+utype+"&ucard="+ucard+"&xdcount="+xdcount;
+		uexXmlHttpMgr.onData = ddsqlSuccess;
+		uexXmlHttpMgr.open(888, "get", url,"");
+		uexXmlHttpMgr.send(888);
+}
+
+function ddsqlSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(888);
+		uexWindow.closeToast();
+		if(result=="no"){uexWindow.toast("0","5","业务已经赎当，请联系典当行！","5000");return;}
+		if(result=="[]"){uexWindow.toast("0","5","没有提交成功！","2000");}
+		else{uexWindow.toast("0","5","提交成功！请耐心等待，35秒后返回数据！","2000");gett();}
+	    }
+}
+
+function gett(){
+var secs =35; //倒计时的秒数 
+for(var i=secs;i>=0;i--){
+setTimeout('showtoast();', (secs-i) * 1000);}
+}
+
+var k=0;
+function showtoast(){
+	var s=35-k;
+	uexWindow.toast("0","5",s+"秒后返回数据！","1000");
+	k++;
+	if(s==0){getsql();k=0;}
+}
+
+
+function getsql(){
+		uexWindow.toast("1","5","正在查询返回的数据...","0");
+		var url = "http://www.epawn.cn/json_app/pay_sql.asp?dnum="+dnum;
+		uexXmlHttpMgr.onData = getsqlSuccess;
+		uexXmlHttpMgr.open(999, "get", url,"");
+		uexXmlHttpMgr.send(999);
+}
+
+function getsqlSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(999);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","没有查询到数据！","2000");}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	//alert(str);
+	var json = eval(str);
+	if (json.length != 1) {uexWindow.alert("提示：","对不起，没有数据返回！！！","确定");return;}
+	if(json[0].ispay=="y" && json[0].cltime.length<5){uexWindow.alert("提示：","上次还款没有得到典当行确认,请与典当行联系021-62289595","确定");return;}
+	if(json[0].htype="a" && json[0].ispay=="y" && json[0].cltime.length>5){uexWindow.alert("提示：","赎当业务办理已经完成，请返回！","确定");return;}
+	
+	if(json[0].isop==1){
+		uexWindow.alert("提示：","对不起，没有数据返回！","确定");
+		gett();
+		return;
+	}
+	
+	if (json[0].clzt == 0) {
+		$$("c1").innerHTML = json[0].jmoney + "元";
+		$$("c2").innerHTML = json[0].jdate;
+		$$("c4").innerHTML = json[0].omoney + "元";
+		paytotal = Number(json[0].hmoney)+Number(json[0].omoney);//总还款金额
+		$$("c3").innerHTML = paytotal + "元";
+		$$("c").style.display = "";
+		$$("e").style.display = "";
+	}
+	else{
+		uexWindow.alert("提示：","输入的典当数据不正确，请重新输入！","确定");
+	}
+
+}
+
+function gopay(){
+var num =dnum+"000"+sjm;//典当票号作为订单号，有可能不行，因为下次支付还是同一个订单号，因此，可以加上验证码来搞。
+var subject = "恒通典当行还款_htdes";//htdes字符串为必须带，区分商城与还款支付进行相关在的操作
+var bodystr = "恒通典当行还款业务";
+var money= paytotal;
+//var money=0.1;//测试完成以后，变量值为shopprice，注释此行即可
+if (uexWidgetOne.platformName == "iOS") {
+	uexPay.setPayInfo('2088002437685162', '2088002437685162', 'MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANReqfl935vagHHq7hbEVoqP+Sem8/HJta28UFeeUSUGn4ltYWUdTkzR6ceG0av+T3sVbgJTz/Rpivf5AgJQjo7/dxKKcz3ToFBA34iAMVbvOxwwP9jl0q+WjLfNC1fv6Yu0gypQWxqxYy2LN2lAbgYD6Z4PsABpRDQIXyRRLBadAgMBAAECgYEAz5wLhr+rDe25i6QjRVaDU8oTxNPNvx114nYqBL3cjdm/tNWdVQAlP6wmYsxFxWJDyQvWE6hjr4hONsTTVffyo8jORF05FLhAFx0RG3ffk0sK8HD4y1WeUFFAlEoSUgu8oLJWH6MMDSD1Bs8MzhJvU3BG/NBKIKFyW8QXSO+PlgECQQDuxUvXjAimncOmcjg0bAN/ISSrfjD+t0iR99KVY6DQVPRq49qiGrVnHBQUy9EzRgGXcmRRTpAFoCba+orYfph9AkEA47Gs88W/XBOjOwYDZdOyr6xHCNG3s0iUI8LK3eZqjnW99GO8EqRifTT93A7O3DXybau1nW2I1DaYTLk1oU3woQJARNJle+mHDM9od29wt9tyXpBlC3FCGgkmR7yQ3DJtRd9W3AB1IkhkhSXYu+3LjOXey5JTTARDCvwQdwnEP4at2QJBAKDz/RVJKQ82loFnq8k0T7Cc8I3MabXjTUzGKs+XTKWtl3yFb/Ihn7lwVy9SjGnf/KIH6lcBkeKpQRmjJsUCqmECQHwOVUQT9p770juou5DdRg8IWbGi4u8PFy3X9/d4SRDTE9zr20ZIPxEzIPgPFz2z9OTW7QnuKxPnxpcb3c2n19k=', 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCabCscKaES8C3+XyL3Efy/wDhk8bPSIetoYOQdF4OArtcNZTPF6SEEMS4FYUVF9lagYBe3GJz+2Uoo7gBLnAdNyByROHG7ogtZVKDyje1G4Rq7GBPb8PtGoA+yIh2mekP/WHf2J6xbuIp5NbEhnY1yJK+Fy2vNXtkRgyMx92uLOQIDAQAB', 'http://www.epawn.cn/json_app/callback_pay.asp');
+}
+uexPay.pay(num, subject, bodystr, money);
+localStorage.moneypay="y";
+}
+
+function paySuccess(status,des){
+if(des==""){des="未知";}
+if(status==0){alert("支付成功！稍后将有工作人员联系您！");//android才有此状态
+}
+else{
+	if (z > 0 && status != 1 ) {alert("支付没有完成，原因：" + des);}
+}
+
+if(status==1 && uexWidgetOne.platformName == "iOS"){
+	isget();//IOS下面的支付状态需要到服务器上得到
+}
+z++;
+}
+
+function isget(){
+	uexWindow.toast("1","5","正在检测支付状态，请不要离开...","2000");
+	setTimeout('getpay();', 2000);
+}
+
+
+function getpay(){
+		uexWindow.toast("0","5","正在获取支付状态...","0");
+		var url = "http://www.epawn.cn/json_app/gethmoney.asp?h="+dnum;
+		uexXmlHttpMgr.onData = getpaySuccess;
+		uexXmlHttpMgr.open(656, "get", url,"");
+		uexXmlHttpMgr.send(656);
+}
+
+function getpaySuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(656);
+		uexWindow.closeToast();
+		tipgetpay(result);
+	    }
+}
+
+function tipgetpay(str){
+	localStorage.moneypay="n";
+	var json = eval(str);
+	if (json.length==1){
+		var zstr=json[0].ispay;
+		if(zstr=="y"){
+			uexWindow.alert("提示","支付成功，稍候将有工作人员确认你的支付信息！","好的");
+		}
+		else{uexWindow.alert("提示","支付没有成功，请稍候再试。如有疑问，请与典当行联系。","确定");}
+	}
+	else{uexWindow.alert("提示","支付没有成功，请稍候再试。如有疑问，请与典当行联系。","确定");}
+}
+
+function getrnd(n) {
+	var str="";
+    for(var i = 0; i < n ; i ++) {
+        str+= Math.floor(Math.random()*10);
+    }
+    return str;
+}
+
+function ismobile(m){
+var reg =/^0?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/;
+if(!m.match(reg)) return false;
+return true;
+}
+</script>
+<script src="js/go.js"></script>
+</html>

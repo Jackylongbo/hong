@@ -1,0 +1,120 @@
+html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td { margin: 0; padding: 0;}
+img { border: 0 none; vertical-align: top; }
+ul, li { list-style-type: none; }
+body, input, select, button, textarea {font-family:"simhei"; }
+.fixed:after { content: "."; display: block; clear: both; height: 0; visibility: hidden; }
+body{ background: url(images/blue_bj.jpg)no-repeat center center fixed;-moz-background-size:cover;background-size:cover;}
+.fixed { display: block; min-height: 1%; }
+*html .fixed { height: 1%; }
+.fl, .fr { display: inline; float: left; }
+.fr { float: right; }
+.center{ margin:auto; clear: both;}
+.center_div {
+      display: -webkit-box;
+      -webkit-box-orient: horizontal;
+      -webkit-box-pack: center;
+      -webkit-box-align: center;
+      display: -moz-box;
+      -moz-box-orient: horizontal;
+      -moz-box-pack: center;
+      -moz-box-align: center;
+      display: -o-box;
+      -o-box-orient: horizontal;
+      -o-box-pack: center;
+      -o-box-align: center;
+      display: -ms-box;
+      -ms-box-orient: horizontal;
+      -ms-box-pack: center;
+      -ms-box-align: center;
+      display: box;
+      box-orient: horizontal;
+      box-pack: center;
+      box-align: center;
+    }
+
+.Blue_bottom_box{ width:100%; height:49px; position:absolute; bottom:0; background:url(images/yellow_big_bt2.png); -webkit-background-size:100%; -o-background-size:100%;}
+
+/*Blue_mu*/
+.Blue_button_1{ background:url(images/button_1.png);}
+.Blue_button_2{ background:url(images/button_2.png);}
+.Blue_button_3{ background:url(images/button_3.png);}
+.Blue_button_4{ background:url(images/button_4.png);}
+.Blue_button_5{ background:url(images/button_5.png);}
+.Blue_button_6{ background:url(images/button_6.png);}
+.Blue_button_7{ background:url(images/button_7.png);}
+.Blue_button_8{ background:url(images/button_8.png);}
+.Blue_button_9{ background:url(images/button_9.png);}
+.Blue_button_10{ background:url(images/button_10.png);}
+
+
+/*iphone_width_320_andriod_width_320*/
+@media screen and (min-width:316px){
+.Blue_photo_box{ width:100%; min-height:190px; border-bottom:#ffffff 0.1em solid; background-color:#EBEBEB;-webkit-box-shadow:#074968 0.1em 0.1em 0.5em; background:no-repeat; -webkit-background-size:100%; -o-background-size:100%; }
+
+.Blue_box1{ width:90%; min-height:150px; margin-top:30px;}
+.Blue_mu_box{ width:100%; height:auto; margin-bottom:20px;}
+.Blue_button_box{ width:54px; height:auto;}
+	.Blue_button_box .button{ width:54px; height:52px;-webkit-background-size:100%; -o-background-size:100%;}
+	.Blue_button_box .font_box{ width:100%; height: auto; font-size:12px; line-height:12px; font-weight:bold; margin-top:6px; color:#A0522D; text-align:center;}
+.button_flk{ margin-left:19px;}
+}
+
+/*_andriod_width_480*/
+@media screen and (min-width:476px){
+.Blue_photo_box{ width:100%; min-height:280px; border-bottom:#ffffff 0.1em solid; background-color:#EBEBEB;-webkit-box-shadow:#074968 0.1em 0.1em 0.5em; background:no-repeat; -webkit-background-size:100%; -o-background-size:100%; }
+
+.Blue_box1{ width:90%; min-height:150px; margin-top:90px;}
+.Blue_mu_box{ width:100%; height:auto; margin-bottom:35px;}
+.Blue_button_box{ width:74px; height:auto;}
+	.Blue_button_box .button{ width:74px; height:72px;-webkit-background-size:100%; -o-background-size:100%;}
+	.Blue_button_box .font_box{ width:100%; height: auto; font-size:17px; line-height:17px; font-weight:bold; margin-top:10px; color:#052f5d; text-align:center;}
+.button_flk{ margin-left:35px;}
+}
+
+/*_andriod_width_540*/
+@media screen and (min-width:536px){
+.Blue_photo_box{ width:100%; min-height:300px; border-bottom:#ffffff 0.1em solid; background-color:#EBEBEB;-webkit-box-shadow:#074968 0.1em 0.1em 0.5em; background:no-repeat; -webkit-background-size:100%; -o-background-size:100%; }
+
+.Blue_box1{ width:90%; min-height:150px; margin-top:120px;}
+.Blue_mu_box{ width:100%; height:auto; margin-bottom:80px;}
+.Blue_button_box{ width:84px; height:auto;}
+	.Blue_button_box .button{ width:84px; height:82px;-webkit-background-size:100%; -o-background-size:100%;}
+	.Blue_button_box .font_box{ width:100%; height: auto; font-size:18px; line-height:18px; font-weight:bold; margin-top:15px; color:#052f5d; text-align:center;}
+.button_flk{ margin-left:35px;}
+}
+
+/*andriod_width_720*/
+@media screen and (min-width:716px){
+.Blue_photo_box{ width:100%; min-height:520px; border-bottom:#ffffff 0.1em solid; background-color:#EBEBEB;-webkit-box-shadow:#074968 0.1em 0.1em 0.5em; background:no-repeat; -webkit-background-size:100%; -o-background-size:100%; }
+
+.Blue_box1{ width:90%; min-height:150px; margin-top:150px;}
+.Blue_mu_box{ width:100%; height:auto; margin-bottom:80px;}
+.Blue_button_box{ width:114px; height:auto;}
+	.Blue_button_box .button{ width:114px; height:112px;-webkit-background-size:100%; -o-background-size:100%;}
+	.Blue_button_box .font_box{ width:100%; height: auto; font-size:26px; line-height:26px; font-weight:bold; margin-top:16px; color:#052f5d; text-align:center;}
+.button_flk{ margin-left:50px;}
+}
+
+/*ipad_andriod_pad_width_768_1024*/
+@media screen and (min-width:764px){
+.Blue_photo_box{ width:100%; min-height:550px; border-bottom:#ffffff 0.1em solid; background-color:#EBEBEB;-webkit-box-shadow:#074968 0.1em 0.1em 0.5em; background:no-repeat; -webkit-background-size:100%; -o-background-size:100%; }
+
+.Blue_box1{ width:90%; min-height:150px; margin-top:120px;}
+.Blue_mu_box{ width:100%; height:auto; margin-bottom:70px;}
+.Blue_button_box{ width:114px; height:auto;}
+	.Blue_button_box .button{ width:114px; height:112px;-webkit-background-size:100%; -o-background-size:100%;}
+	.Blue_button_box .font_box{ width:100%; height: auto; font-size:26px; line-height:26px; font-weight:bold; margin-top:16px; color:#052f5d; text-align:center;}
+.button_flk{ margin-left:50px;}
+}
+
+/*ipad_andriod_pad_width_800_1280*/
+@media screen and (min-width:800px){
+.Blue_photo_box{ width:100%; min-height:560px; border-bottom:#ffffff 0.1em solid; background-color:#EBEBEB;-webkit-box-shadow:#074968 0.1em 0.1em 0.5em; background:no-repeat; -webkit-background-size:100%; -o-background-size:100%; }
+
+.Blue_box1{ width:90%; min-height:150px; margin-top:160px;}
+.Blue_mu_box{ width:100%; height:auto; margin-bottom:120px;}
+.Blue_button_box{ width:124px; height:auto;}
+	.Blue_button_box .button{ width:124px; height:122px;-webkit-background-size:100%; -o-background-size:100%;}
+	.Blue_button_box .font_box{ width:100%; height: auto; font-size:29px; line-height:29px; font-weight:bold; margin-top:18px; color:#052f5d; text-align:center;}
+.button_flk{ margin-left:55px;}
+}

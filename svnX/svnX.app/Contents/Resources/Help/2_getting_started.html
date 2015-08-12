@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Getting started</title>
+<link rel="stylesheet" type="text/css" href="Help.css" />
+<meta name="KEYWORDS" content="start, intro, new, familiar, basics" />
+<meta name="description" content="Getting started with svnX." />
+</head>
+<body>
+<div class="body" id="body">
+<a name="getting_started"></a>
+<h1>2. Getting started</h1>
+<a name="toc4"></a>
+<h2>2.1. If you are new to Subversion</h2>
+<p>You should definitely get familiar with Subversion before using svnX!<br/>
+The book is available in HTML or PDF at &lt;<a href="http://svnbook.red-bean.com">svnbook.red-bean.com</a>&gt;.<br/>
+Also, learn the command-line basics.
+Anyway, you won’t be able to set up a server or repository with svnX.</p>
+<a name="toc5"></a>
+<h2>2.2. Requirements</h2>
+<p>SvnX is built as a Universal binary application. It requires the following to run:</p>
+<ul>
+<li>Mac OS X <b>10.4</b> or later.</li>
+<li>A working install of <b>Subversion 1.4</b>, <b>1.5</b> or <b>1.6</b>.<br/>
+The recommended Subversion 1.6.13 installer for Mac OS X 10.5 (Leopard) is available
+<a href="http://svnbinaries.open.collab.net/files/documents/153/3923/Subversion-1.6.13-10.5.x.dmg">here</a><br/>and for Mac OS X 10.6 (Snow Leopard) <a href="http://svnbinaries.open.collab.net/files/documents/153/3924/Subversion-1.6.13-10.6.x.dmg">here</a>.<br/>
+The recommended Subversion 1.5.7 installer is available <a href="http://svnbinaries.open.collab.net/files/documents/153/2449/file_2449.dat/Subversion%201.5.7%20Universal.dmg">here</a>.<br/>
+The recommended Subversion 1.4.6 installer is available <a href="http://svnbinaries.open.collab.net/files/documents/153/494/file_494.dat/Subversion%201.4.6%20Universal-2.dmg">here</a>.<br/></li>
+</ul>
+<div class="note">
+In order to benefit from the new accelerated working copy refresh feature Subversion must have been installed in /opt/subversion.  Additionally if the above Subversion 1.4.6 installer was used the following should be executed in a terminal window:<p></p>
+<code>    cd /opt/subversion/lib; ln -s libapr-0.0.9.*.dylib libapr-1.0.dylib</code>
+</div>
+<p>If you’re using another package, make sure that the path to svn binaries is correct, in svnX preferences.  Initially the path is set to “<code>/usr/local/bin</code>”, “<code>/opt/subversion/bin</code>” or “<code>/usr/bin</code>”.</p>
+<p>The first time you launch svnX it will look in the above locations for a copy of the Subversion command line tool ‘<q>svn</q>’.  If it can’t find one it will notify you and ask you to locate one.</p>
+<a name="toc6"></a>
+<h2>2.3. Open-source project</h2>
+<p>The latest source code for svnX, along with pre-built versions, is available from
+&lt;<a href="http://svnx.googlecode.com">svnx.googlecode.com</a>&gt;.</p>
+<a name="toc7"></a>
+<h2>2.4. SvnX Google discussion group</h2>
+<p>Please visit the svnX Google discussion group to offer &amp; receive support and to discuss all svnX related topics &lt;<a href="http://groups.google.com/group/svnx">groups.google.com/group/svnx</a>&gt;.<br/>
+E-mail the discussion group: &lt;<a href="mailto:svnx@googlegroups.com">svnx@googlegroups.com</a>&gt;.</p>
+</div>
+
+</body></html>

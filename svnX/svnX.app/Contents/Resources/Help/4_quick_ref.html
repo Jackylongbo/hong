@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Quick Reference</title>
+<link rel="stylesheet" type="text/css" href="Help.css" />
+<meta name="KEYWORDS" content="working copy, repository, review and commit" />
+<meta name="description" content="Keyboard shortcuts quick reference." />
+</head>
+<body>
+<div class="body" id="body">
+<a name="quick_ref"></a>
+<h1>4. Quick Reference</h1>
+<a name="win_wc"></a>
+
+<table border="1" class="QwikRef">
+<tr>
+<th colspan="2">Working copy window</th>
+</tr>
+<tr>
+<td>return or enter</td>
+<td>If the file list is focused then opens selected files/folders.</td>
+</tr>
+<tr>
+<td>any alpha-numeric key</td>
+<td>If the file list is focused then selects the next name beginning with that character.</td>
+</tr>
+<tr>
+<td>⇧⌘F</td>
+<td>Reveal the selected file in the Finder.</td>
+</tr>
+<tr>
+<td>⌘R</td>
+<td>Refresh display.</td>
+</tr>
+<tr>
+<td>⌥⌘R</td>
+<td>Refresh display showing any repository updates.</td>
+</tr>
+<tr>
+<td>⌘U</td>
+<td>Update the working copy to HEAD.</td>
+</tr>
+<tr>
+<td>⌥⌘U</td>
+<td>Open the custom update sheet.</td>
+</tr>
+<tr>
+<td>⌘D</td>
+<td>Diff the selected files against their pristine (BASE) copies.</td>
+</tr>
+<tr>
+<td>⇧⌘D</td>
+<td>Diff the selected files against their previous (PREV) revision.</td>
+</tr>
+<tr>
+<td>⌘L</td>
+<td>Open a sheet to browse the selected item’s log or diff it against any previous revision.</td>
+</tr>
+<tr>
+<td>⌘S</td>
+<td>Open a repository window for this working copy.</td>
+</tr>
+<tr>
+<td>⌃⌘T</td>
+<td>Switch to tree view.</td>
+</tr>
+<tr>
+<td>⌃⌘F</td>
+<td>Switch to flat view.</td>
+</tr>
+<tr>
+<td>⌃⌘S</td>
+<td>Switch to smart view.</td>
+</tr>
+<tr>
+<td>double-click</td>
+<td>Item in file list to open it.</td>
+</tr>
+<tr>
+<td>⌘P</td>
+<td>Open/Close the Subversion properties palette.</td>
+</tr>
+<tr>
+<td>⌥⌘O</td>
+<td>Open/Close the Output drawer window.</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>Item from file list to an application to open it or to a Finder window to move it.</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>Drop a repository item, a log entry or a log entry path to a Working Copy window to merge.<br/> Drop a repository directory while pressing ⌘ to switch.</td>
+</tr>
+<tr>
+<td>right-click or ⌃-click list</td>
+<td>Opens contextual menu whose commands act upon the selected items.<br/> Press ⌥ to reveal some alternate commands.</td>
+</tr>
+</table>
+<a name="win_repo"></a>
+
+<table border="1" class="QwikRef">
+<tr>
+<th colspan="2">Repository window</th>
+</tr>
+<tr>
+<td>double-click repository item</td>
+<td>Browse that item “as a sub-repository”.</td>
+</tr>
+<tr>
+<td>⌘D (or ⇧⌘D)</td>
+<td>Diff the selected repository items log entry or log entry path against its previous (PREV) revision.</td>
+</tr>
+<tr>
+<td>⌘B</td>
+<td>Open the ‘<q>svn blame</q>’ output for the selected files.</td>
+</tr>
+<tr>
+<td>⌥⌘B</td>
+<td>Open the ‘<q>svn blame --verbose</q>’ output for the selected files.</td>
+</tr>
+<tr>
+<td>⌘P</td>
+<td>Open log report settings sheet for selected item or current log items.</td>
+</tr>
+<tr>
+<td>⌘K</td>
+<td>Checkout the selected directory.</td>
+</tr>
+<tr>
+<td>⌘S</td>
+<td>Export the selected items.</td>
+</tr>
+<tr>
+<td>⌘O or enter</td>
+<td>Open the selected items in appropriate applications.</td>
+</tr>
+<tr>
+<td>⌥⌘O</td>
+<td>Open/Close the Output drawer window.</td>
+</tr>
+<tr>
+<td>⌘R</td>
+<td>Refresh/update the log list.</td>
+</tr>
+<tr>
+<td>⌥⌘R</td>
+<td>Refresh the browser view.</td>
+</tr>
+<tr>
+<td>⌘L</td>
+<td>Open a diff/log sheet for the selected repository file/directory or log entry path.</td>
+</tr>
+<tr>
+<td>⌘T</td>
+<td>Toggle between Advanced &amp; Simple log displays.</td>
+</tr>
+<tr>
+<td>space</td>
+<td>Browse the repository at selected log item’s revision.</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>Drag repository items to an application to open them, or to a Finder window to export or checkout.<br/> Drag a repository item, a log entry or a log entry path to a working copy window to merge, or a repository directory while pressing ⌘ to switch.</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>Drop a file or folder (from the Finder) on to a directory in the repository browser to import it.</td>
+</tr>
+</table>
+<a name="win_review"></a>
+
+<table border="1" class="QwikRef">
+<tr>
+<th colspan="2">Review and Commit window</th>
+</tr>
+<tr>
+<td>⇧⌘A</td>
+<td>Check all items in the available items list.</td>
+</tr>
+<tr>
+<td>⇧⌘N</td>
+<td>Uncheck all items in the available items list.</td>
+</tr>
+<tr>
+<td>⌘R</td>
+<td>Refresh the working copy &amp; available items list.</td>
+</tr>
+<tr>
+<td>⌘D</td>
+<td>Diff the selected file against its pristine copy.</td>
+</tr>
+<tr>
+<td>⌘O or double-click</td>
+<td>Open the selected file.</td>
+</tr>
+<tr>
+<td>⌘T</td>
+<td>Toggle commit status of the selected file.</td>
+</tr>
+<tr>
+<td>⇧⌘F</td>
+<td>Reveal the selected file in the Finder.</td>
+</tr>
+<tr>
+<td>⌘I</td>
+<td>Insert the currently selected recent message or template into message text.</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>File from list to an application to open it or to a Finder window to copy it.</td>
+</tr>
+<tr>
+<td>Template keywords</td>
+<td>&lt;MACHINE&gt;, &lt;USER&gt;, &lt;DATE&gt;, &lt;FILES&gt;, &lt;FILES&gt;…&lt;/FILES&gt; &amp; &lt;SCRIPT&gt;…&lt;/SCRIPT&gt;</td>
+</tr>
+</table>
+<a name="win_wcs_and_reps"></a>
+
+<table border="1" class="QwikRef">
+<tr>
+<th colspan="2">Working Copies &amp; Repositories windows</th>
+</tr>
+<tr>
+<td>any alpha-numeric key</td>
+<td>Selects the next name beginning with that character.</td>
+</tr>
+<tr>
+<td>⌘E</td>
+<td>Hide/show edit fields.</td>
+</tr>
+<tr>
+<td>double-click or return</td>
+<td>Open or activate window for selected Working Copy or Repository.</td>
+</tr>
+<tr>
+<td>⌥-double-click or ⌥-return</td>
+<td>Open new window for selected Working Copy or Repository.</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>Drag items up &amp; down lists to move them.  Press ⌥ to make a copy.</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>Drag items between windows to copy name, user &amp; password.</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>Drop a folder in either window to create a new item.<br/>Repositories window also accepts URLs &amp; weblocs.</td>
+</tr>
+</table>
+</div>
+
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-img.css">
+    <link rel="stylesheet" href="css/ui-list.css">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/ui-btn.css">
+    <link rel="stylesheet" href="css/ui-input.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/ui-color.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+	<script src="js/wbSin.js">
+    </script>
+  </head>
+<body class="um-vp">
+        <div id="page_0" class="up ub ub-ver" tabindex="0">
+            <!--header开始-->
+            <div id="header" class="uh c-blu2 t-wh tbg us">
+                <!--按钮开始-->
+                <div class="btn btn-l btn-a ub ub-ac " ontouchstart="winclose();">
+                    <div class="ulim">
+                        返回
+                    </div>
+                </div>
+                <!--按钮结束--><h1 class="ut ulev0 ut-s tx-c" tabindex="0" id="showstr">分享到新浪微博</h1>
+            </div>
+            <!--header结束-->
+            <!--content开始-->
+            <div id="content" class="ub-f1 tx-l">
+            	
+<!--块容器开始-->
+<div class="ub ub-ver b-gra">	
+<div class="b-gra uinn">
+<!--文本开始-->
+<div class="uba uc-a1 b-gra us-i uinput uinn4">    
+ <textarea placeholder="不少于五个字" name="txt" id="txt" class="uc-a1" style="height:4em;">亲爱的</textarea>
+</div>
+<!--文本结束-->
+</div>	
+<div class="uinn tx-l">
+<!--按钮开始-->
+<div onclick="openweibo();" ontouchstart="zy_touch('btn-act')" class="btn us uinn5 c-org uc-a t-wh">   
+分　　享      
+</div>
+<!--按钮结束-->
+
+</div> 
+</div>
+<!--块容器结束-->
+
+</div>
+<!--content结束-->
+</div>
+</body>
+<script>
+	$$("txt").value=localStorage.sharestr;
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+}
+
+function winclose(){
+            if (localStorage.platstr == "android") {
+                uexWindow.close();
+            }
+            else {
+                uexWindow.windowBack(0);
+            }
+        }
+
+var WBSin = new WBSin({key:"3845409824",redirectUrl:"http://www.3g2win.com/tiaozhuan/index.html"});
+
+function openweibo(){
+	if($$("txt").value==""){
+		uexWindow.toast("0","5","分享内容不能为空","3000");
+		return false;
+	}
+	else{
+		localStorage.sharestr=$$("txt").value;
+	}
+	
+if(WBSin.checkLogin()){
+postwb();
+return;
+}
+WBSin.login(function(d){
+if(parseInt(d)==1)
+postwb();
+uexWindow.toast("0","5","正在分享...","3000");
+});
+}
+
+function postwb(){
+var cont = $$("txt").value;
+WBSin.request("statuses/update",function(data){showstr(data);
+},{
+status:cont
+},"post");
+}
+
+function showstr(str){
+	if(str.length<100)
+	{uexWindow.toast("0","5","分享没有成功，请稍候再试...","3000");}
+	else
+	{tipwin();}
+}
+
+function tipwin(){
+	uexWindow.cbConfirm=function(opId,dataType,data){
+	winclose();
+	}
+	uexWindow.confirm("分享提示","亲！分享成功！感谢您的分享！","确定")
+}
+</script>
+</html>

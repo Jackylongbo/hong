@@ -1,0 +1,56 @@
+/* style type="text/css" */
+
+td		{width: 28px; padding: 0px 5px 0px 5px}
+
+body	{ font: 80% sans-serif; font-family: "Lucida Grande", sans-serif; }
+/*var		{ color: #052; font-style: italic; }*/
+var		{ color: #445; font: 700 100% normal; }
+tt		{ color: #860; font-family: monospace; }
+q		{ color: #400; font: 400 11px monospace; }
+q:before{ content: ""; }
+q:after	{ content: ""; }
+/*h1	{ border-top: 2px solid #AAA; margin-top: 18px; padding-top: 12px; }
+h2, h3	{ background-color: #FFEEF8; margin-top: 24px; padding-top: 2px; padding-left: 8px; }
+div.header>h3	{ background-color: #FFF }*/
+h2		{ background-color: #EFEEF8; margin-top: 24px; padding-top: 2px; padding-left: 8px; }
+pre		{ background-color: #EEE; padding: 8px 0px; font: 400 11px monospace; white-space: pre-wrap }
+code	{ font: 400 11px monospace }
+
+span.toggle { cursor: pointer; font-size: 120%; color: #777; }
+
+/* Inline TOC*/
+div.header { text-align: center; }
+div.toc ol ul li { display: block; }
+
+/* Sidebar TOC
+div.header { text-align: center; position: relative; left: 250px; width: 700px; }
+div.toc { position: fixed; top: 0; left: 0; bottom: 0; width: 245px; font: 90% normal; background-color: #FFFFE0; }
+div.toc ol ul { text-indent: -40px; }
+div.toc ol ul li { display: block; text-indent: -40px; }
+
+div.body { position: absolute; left: 250px; width: 700px; }
+*/
+
+
+.note        { background-color: #FFE3BF; border: 2px solid #EFD3AF; padding: 4px 4px 4px 52px;
+			   text-indent: -45px; margin: 0 3em 0 3em; }
+.note code   { padding-left: 45px; }
+.note:before { content: "NOTE: "; font-weight: bold; }
+
+/*table.Cmds { border-style: solid; border-width: 0 0 0 3em; border-color: #7F7; }*/
+/*table.Cmds { margin-left: 5%; width: 95%; border: 0; }*/
+table.Cmds { margin-left: 5%; width: 95%; }
+table.Cmds td:first-child { width: 30%; color: #444; font: bold 100% normal; }
+table.Cmds tr { vertical-align: baseline; font: 12px "Lucida Grande"; }
+
+/*table th {background-color: #dcdcff}*/
+table.QwikRef { border-style: solid; border-width: 1px; border-color: #c0c0c0; margin-bottom: 20px;
+				width: 700px; border-collapse: collapse; }
+table.QwikRef th {text-align: left; font: bold 15px "Lucida Grande"; background-color: #dcdcff; padding: 3px 5px}
+/*th {text-align: left; font-style: bold; font: bold 15px Lucida Grande; background-color: #dcdcff; padding: 3px 5px}*/
+table.QwikRef tr { vertical-align: baseline; margin: 0px; font: 12px "Lucida Grande"; }
+/*td {width: 490px; padding: 1px 5px 1px 5px}*/
+/*td:first-child {width: 190px}*/
+table.QwikRef td {width: 73%; padding: 1px 5px 1px 5px}
+table.QwikRef td:first-child {width: 27%}
+

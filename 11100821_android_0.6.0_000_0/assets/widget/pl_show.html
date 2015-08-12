@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-img.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+	<div id="page_0" class="up ub ub-ver" tabindex="0">
+	<!--header开始-->
+            <div id="header" class="uh c-org c-m1 t-wh">
+                <!--按钮开始-->
+ 				<div class="btn btn-l btn-a ub ub-ac" onclick="goback();"><div class="ulim">返回</div></div>
+				<!--按钮结束-->
+			<h1 class="ut ulev0 ut-s tx-c" tabindex="0" id="tabtitle">评论详情</h1>
+            </div>
+            <!--header结束-->
+		
+			
+				
+	<div id="content">
+<div id="a1">		
+<!--块容器开始-->
+<!--块容器结束-->
+</div>
+
+<div id="a2">
+<!--块容器开始-->
+<!--块容器结束-->
+</div>
+
+</div>
+
+</div>
+</body>
+<script>
+	var id=localStorage.plid;
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	gbookshow();
+	uexWindow.setReportKey('0', '1');
+    uexWindow.onKeyPressed = function(keyCode){goback();}
+}
+
+function gbookshow(){
+		uexWindow.toast("0","5","正在读取...","0");
+		var url = json_http_url+"pinglunshow.asp?id="+id;
+		uexXmlHttpMgr.onData = showSuccess;
+		uexXmlHttpMgr.open(7103, "get", url,"");
+		uexXmlHttpMgr.send(7103);
+}
+
+function showSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(7103);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","当前没有内容","2000");}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	//alert(str);
+	var json=eval(str);
+	var i=0;
+	var html="";
+	if(json.length==1){
+		html="<div class='ub ub-ver c-wh b-gra umar-t' style='background-color:#E0FFFF'>";
+		html+="<div class='b-gra uinn' style='color:#008080;'><b>会员："+json[0].ProductName+"</b></div>";
+		html+="<div class='b-gra uinn textcss'>"+json[0].Remark+"</div>";
+		html+="<div class='uinn tx-r' style='color:#C0C0C0;font-size:0.8em'>"+"时间："+json[0].AddTime+"</div>";
+		html+="</div>";
+		$$("a1").innerHTML=html;
+	}	
+}
+
+function goback(){
+	uexWindow.windowBack(1);
+}
+</script>
+</html>

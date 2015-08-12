@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/ui-btn.css">
+    <link rel="stylesheet" href="css/ui-img.css">
+    <link rel="stylesheet" href="css/ui-res.css">
+    <link rel="stylesheet" href="css/ui-list.css">
+    <link rel="stylesheet" href="css/ui-base.css">
+    <link rel="stylesheet" href="css/ui-box.css">
+    <link rel="stylesheet" href="css/ui-color.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main">
+
+
+<!--块容器开始-->
+<div class="ub uinn ub-ver tx-c b-gra btext ulev2">
+<b>恒通典当行</b>
+</div>
+<!--块容器结束-->
+
+
+
+<div id="lx" class="uinn">
+<!--块容器开始-->
+<div class="ub ub-ver uba b-gra uc-a1 tx-l">
+<div class="ubb b-gra c-m1 uinn t-blu">总部：上海市长宁区茅台路357号</div>
+<div class="ubb b-gra c-m1 uinn">公交：127、71、383、856、944</div>
+<div class="ubb b-gra c-m1 uinn t-blu">轨道：地铁2号线，娄山关路站 近芙蓉江路路口</div>
+<div class="ubb b-gra c-m1 uinn" onclick="tel('02162289595');">电话：62289595*0 62336234*0</div>
+<div class="ubb b-gra c-m1 uinn"><div class="uinn">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="map();" class="ub ub-ac ub-pc btn umh4 c-m10 ulim1 b-bla ulev-0 uinn5 c-org us uc-a t-wh"><b>查看地图</b></div>
+<!--按钮结束-->
+</div>
+</div>
+</div>
+<!--块容器结束-->
+</div>
+
+<div id="lxa" class="uinn">
+<!--块容器开始-->
+<div class="ub ub-ver uba b-gra uc-a1 tx-l">
+<div class="ubb b-gra c-m1 uinn t-blu">分部：上海市普陀区大渡河路1505号</div>
+<div class="ubb b-gra c-m1 uinn">公交：950、944、838、856、754、743、551</div>
+<div class="ubb b-gra c-m1 uinn t-blu">轨道：11号线 真如站 近武宁路路口，友通数码港</div>
+<div class="ubb b-gra c-m1 uinn" onclick="tel('02152656568');">电话：52656568，52656566</div>
+<div class="ubb b-gra c-m1 uinn"><div class="uinn">
+<!--按钮开始-->
+<div ontouchstart="zy_touch('btn-act')" onclick="map2();" class="ub ub-ac ub-pc btn umh4 c-m10 ulim1 b-bla ulev-0 uinn5 c-org us uc-a t-wh"><b>查看地图</b></div>
+<!--按钮结束-->
+</div>
+</div>
+</div>
+<!--块容器结束-->
+</div>
+
+
+
+</div>
+</body>
+<script>
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+}
+
+function tel(m){
+	uexCall.dial(m);
+}
+
+function map(){
+	uexWindow.open('map_win', '0', 'all_map.html', 2, '', '', 0x4);
+}
+function map2(){
+	uexWindow.open('map_win', '0', 'all_map2.html', 2, '', '', 0x4);
+}
+</script>
+<script src="js/go.js"></script>
+</html>

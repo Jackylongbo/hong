@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-img.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main uinn">
+
+
+<!--列表开始-->
+<div id="nlist" class="b-gra c-wh us">
+</div>
+<!--列表结束-->
+
+
+</div>
+</body>
+<script>
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	caselist();
+}
+
+function caselist(){
+		uexWindow.toast("0","5","正在获取...","0");
+		var url = json_http_url+"prolist.asp?SortID=14";
+		uexXmlHttpMgr.onData = caselistSuccess;
+		uexXmlHttpMgr.open(1212, "get", url,"");
+		uexXmlHttpMgr.send(1212);
+}
+
+function caselistSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(1212);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","目前暂无内容","2000");}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	//alert(str);
+	var json=eval(str);
+	var i=0;
+	var html="";
+	var t="";
+	for (i; i < json.length; i++) {
+		html+="<div ontouchstart=zy_touch('btn-act') onclick='show("+json[i].ID+");' class='uc-t c-m2 ubb ub b-gra t-bla ub-ac lis'>";
+		html+="<div class='ub-f1 ub ub-ver'>";
+		html+="<div class='ulev1 btext'><b>"+json[i].ProductName+"</b></div>";
+		t=json[i].Content.replace(/<[^>]+>/g,"");
+		t=t.replace(/　/g,"");
+		html+="<div class='ulev-2 umh4 t-gra ut-s umar-t'>"+t+"</div>";
+		html+="</div>";
+		html+="<div class='lis-th ub-img1' style='background:url("+json_http_url+json[i].SmallPic+") no-repeat;'></div>";
+		html+="</div>";
+	}
+	$$("nlist").innerHTML+=html;
+}
+
+function show(id){
+	localStorage.caseid=id;
+	localStorage.infile="case_show.html";
+	localStorage.showstr="内容详情";
+	uexWindow.open("openwin", '0', "all_list.html", 2, '', '', 4);
+}
+
+</script>
+<script src="js/go.js"></script>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+  <head>
+    <title>
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="css/ui-img.css">
+        <link rel="stylesheet" href="css/ui-list.css">
+        <link rel="stylesheet" href="css/ui-input.css">
+        <link rel="stylesheet" href="css/ui-btn.css">
+        <link rel="stylesheet" href="css/ui-base.css">
+        <link rel="stylesheet" href="css/ui-box.css">
+        <link rel="stylesheet" href="css/ui-color.css">
+        <link rel="stylesheet" href="css/ui-res.css">
+    <script src="js/zy_control.js">
+    </script>
+    <script src="js/zy_click.js">
+    </script>
+    <script src="js/public.js">
+    </script>
+  </head>
+<body class="um-vp">
+<div id="main">
+
+<!--列表开始-->
+<div id="nlist" class="b-gra us">
+</div>
+<!--列表结束-->
+
+
+<div id="more">
+<!--块容器开始-->
+<div class="ub b-gra">
+<div class="b-gra ub-f1 uinn uc-l1 tx-c" ontouchstart="zy_touch('btn-act')" onclick="showmore();">更多内容</div>	 
+</div>
+<!--块容器结束-->
+</div>
+
+</div>
+</body>
+<script>
+var page=0;
+var classid=localStorage.sortid;
+$$("more").style.display = "none";
+window.uexOnload=function(type)
+{
+	if(!type){
+		uexWindow.setBounce("1");
+	}
+	newslist(0);
+}
+
+function newslist(pages){
+		page = int(pages) + 1;
+		uexWindow.toast("0","5","正在获取...","0");
+		var url = json_http_url+"newslist.asp?SortID="+classid+"&page="+page;
+		uexXmlHttpMgr.onData = newslistSuccess;
+		uexXmlHttpMgr.open(5525, "get", url,"");
+		uexXmlHttpMgr.send(5525);
+}
+
+function newslistSuccess(opid,status,result){
+		if (status == -1) {
+			uexWindow.toast("0","5","服务器端出错或请求超时","3000");
+		}
+		if(status==1){
+		uexXmlHttpMgr.close(5525);
+		uexWindow.closeToast();
+		if(result=="[]"){uexWindow.toast("0","5","目前暂无内容","2000");$$("more").style.display = "none";}
+		else{showhtml(result);}
+	    }
+}
+
+function showhtml(str){
+	var json=eval(str);
+	var i=0;
+	var html="";
+	for (i; i < json.length; i++) {	
+		html+="<div ontouchstart=zy_touch('btn-act') onclick='show("+json[i].ID+");' class='uc-t c-m2 ubb ub b-gra t-bla ub-ac lis'>";
+		html+="<div class='ub-f1 ub ub-ver'>";
+		html+="<div class='ulev1 btext'><b>"+json[i].Title+"</b></div>";
+		t=json[i].Content.replace(/<[^>]+>/g,"");
+		t=t.replace(/　/g,"");
+		html+="<div class='ulev-2 umh4 t-gra ut-s umar-t'>"+t+"</div>";
+		html+="</div>";
+		html+="<div class='lis-th ub-img1' style='background:url("+json_http_url+json[i].BigPic+") no-repeat;'></div>";
+		html+="</div>";
+	}
+	$$("nlist").innerHTML+=html;
+	$$("more").style.display = "";
+}
+
+function show(id){
+	localStorage.newsid=id;
+	localStorage.infile="news_show.html";
+	localStorage.showstr="资讯详细内容";
+	uexWindow.open("news", '0', "all_list.html", 2, '', '', 4|128);
+}
+
+function showmore(){
+	newslist(page);
+}
+</script>
+
+<script src="js/go.js"></script>
+</html>
